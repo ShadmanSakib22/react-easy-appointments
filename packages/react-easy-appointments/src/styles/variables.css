@@ -1,0 +1,43 @@
+/*
+  react-easy-appointments — CSS Variable Reference
+  ================================================
+  Override any of these on .rea-calendar in your own stylesheet:
+
+    .rea-calendar {
+      --rea-color-available: hotpink;
+    }
+
+  ── Colors ──────────────────────────────────────────────
+  --rea-color-available        Available slot background     #22c55e
+  --rea-color-available-hover  Available slot hover          #16a34a
+  --rea-color-booked           Booked-by-you slot / accents  #3b82f6
+  --rea-color-booked-hover     Booked slot hover             #2563eb
+  --rea-color-unavailable      Taken-by-other slot           #d1d5db
+  --rea-color-text             Primary text                  #111827
+  --rea-color-text-muted       Secondary / label text        #6b7280
+  --rea-color-bg               Cell / modal background       #ffffff
+  --rea-color-border           Grid lines and borders        #e5e7eb
+  --rea-color-today            Today cell highlight          #eff6ff
+  --rea-color-outside          Out-of-month cell bg          #f9fafb
+  --rea-color-modal-backdrop   Modal overlay                 rgba(0,0,0,0.5)
+  --rea-color-modal-bg         Modal card background         #ffffff
+
+  ── Typography ──────────────────────────────────────────
+  --rea-font-family            Inherits from parent          inherit
+  --rea-font-size-base         Body text                     14px
+  --rea-font-size-sm           Labels, slot text             12px
+
+  ── Shape ───────────────────────────────────────────────
+  --rea-radius-sm              Slot buttons                  4px
+  --rea-radius-md              Calendar card                 8px
+  --rea-radius-lg              Modal card                    12px
+  --rea-radius-btn             Toolbar buttons               6px
+  --rea-shadow-modal           Modal drop shadow             0 20px 60px rgba(0,0,0,0.15)
+
+  ── Layout ──────────────────────────────────────────────
+  --rea-cell-min-height        Month cell minimum height     80px
+  --rea-cell-padding           Month cell inner padding      8px
+  --rea-toolbar-height         Toolbar bar height            48px
+  --rea-time-gutter-width      Week view time label column   60px
+  --rea-week-row-height        Week view hourly row height   56px
+*/

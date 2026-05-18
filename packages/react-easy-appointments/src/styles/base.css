@@ -1,0 +1,246 @@
+/* react-easy-appointments — default theme
+   Override any variable on .rea-calendar or its descendants */
+
+.rea-calendar {
+  --rea-color-available:       #22c55e;
+  --rea-color-available-hover: #16a34a;
+  --rea-color-booked:          #3b82f6;
+  --rea-color-booked-hover:    #2563eb;
+  --rea-color-unavailable:     #d1d5db;
+  --rea-color-text:            #111827;
+  --rea-color-text-muted:      #6b7280;
+  --rea-color-bg:              #ffffff;
+  --rea-color-border:          #e5e7eb;
+  --rea-color-today:           #eff6ff;
+  --rea-color-outside:         #f9fafb;
+  --rea-color-modal-backdrop:  rgba(0, 0, 0, 0.5);
+  --rea-color-modal-bg:        #ffffff;
+  --rea-font-family:           inherit;
+  --rea-font-size-base:        14px;
+  --rea-font-size-sm:          12px;
+  --rea-radius-sm:             4px;
+  --rea-radius-md:             8px;
+  --rea-radius-lg:             12px;
+  --rea-radius-btn:            6px;
+  --rea-shadow-modal:          0 20px 60px rgba(0, 0, 0, 0.15);
+  --rea-cell-min-height:       80px;
+  --rea-cell-padding:          8px;
+  --rea-toolbar-height:        48px;
+  --rea-time-gutter-width:     60px;
+  --rea-week-row-height:       56px;
+
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-base);
+  color: var(--rea-color-text);
+  box-sizing: border-box;
+}
+
+.rea-calendar *,
+.rea-calendar *::before,
+.rea-calendar *::after { box-sizing: inherit; }
+
+/* ── Toolbar ─────────────────────────────────────────── */
+.rea-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  height: var(--rea-toolbar-height);
+  background: var(--rea-color-bg);
+  border-bottom: 1px solid var(--rea-color-border);
+}
+.rea-toolbar__nav { display: flex; gap: 4px; }
+.rea-toolbar button {
+  background: none;
+  border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-btn);
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: var(--rea-font-size-base);
+  color: var(--rea-color-text);
+  transition: background 0.15s;
+}
+.rea-toolbar button:hover { background: var(--rea-color-border); }
+.rea-toolbar__title { font-weight: 600; font-size: 16px; }
+.rea-toolbar__views { display: flex; gap: 4px; }
+.rea-toolbar__view-btn--active {
+  background: var(--rea-color-booked) !important;
+  color: #fff !important;
+  border-color: var(--rea-color-booked) !important;
+}
+
+/* ── Month View ──────────────────────────────────────── */
+.rea-month-view {
+  border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-md);
+  overflow: hidden;
+}
+.rea-month-view__header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--rea-color-outside);
+  border-bottom: 1px solid var(--rea-color-border);
+}
+.rea-month-view__day-name {
+  padding: 8px;
+  text-align: center;
+  font-size: var(--rea-font-size-sm);
+  font-weight: 600;
+  color: var(--rea-color-text-muted);
+  text-transform: uppercase;
+}
+.rea-month-view__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.rea-month-cell {
+  min-height: var(--rea-cell-min-height);
+  padding: var(--rea-cell-padding);
+  border-right: 1px solid var(--rea-color-border);
+  border-bottom: 1px solid var(--rea-color-border);
+  background: var(--rea-color-bg);
+}
+.rea-month-cell:nth-child(7n) { border-right: none; }
+.rea-month-cell--outside {
+  background: var(--rea-color-outside);
+  color: var(--rea-color-text-muted);
+}
+.rea-month-cell--today { background: var(--rea-color-today); }
+.rea-month-cell__date { display: block; font-size: var(--rea-font-size-sm); font-weight: 500; margin-bottom: 4px; }
+.rea-month-cell__slots { display: flex; flex-direction: column; gap: 2px; }
+
+/* ── Week View ───────────────────────────────────────── */
+.rea-week-view {
+  border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-md);
+  overflow: hidden;
+}
+.rea-week-view__header {
+  display: grid;
+  grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
+  border-bottom: 1px solid var(--rea-color-border);
+  background: var(--rea-color-outside);
+}
+.rea-week-view__day-header {
+  padding: 8px 4px;
+  text-align: center;
+  font-size: var(--rea-font-size-sm);
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border-left: 1px solid var(--rea-color-border);
+}
+.rea-week-view__grid { overflow-y: auto; max-height: 600px; }
+.rea-week-view__row {
+  display: grid;
+  grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
+  min-height: var(--rea-week-row-height);
+  border-bottom: 1px solid var(--rea-color-border);
+}
+.rea-week-view__time-label {
+  padding: 4px 8px;
+  font-size: var(--rea-font-size-sm);
+  color: var(--rea-color-text-muted);
+  text-align: right;
+}
+.rea-week-view__cell {
+  border-left: 1px solid var(--rea-color-border);
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Slot Blocks ─────────────────────────────────────── */
+.rea-slot {
+  display: block;
+  width: 100%;
+  padding: 2px 6px;
+  border: none;
+  border-radius: var(--rea-radius-sm);
+  font-size: var(--rea-font-size-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  color: #fff;
+  font-weight: 500;
+}
+.rea-slot--available { background: var(--rea-color-available); }
+.rea-slot--available:hover { background: var(--rea-color-available-hover); }
+.rea-slot--booked { background: var(--rea-color-booked); cursor: default; }
+.rea-slot--unavailable {
+  background: var(--rea-color-unavailable);
+  color: var(--rea-color-text-muted);
+  cursor: not-allowed;
+}
+.rea-slot__label { display: block; font-size: 10px; opacity: 0.85; }
+
+/* ── Booking Modal ───────────────────────────────────── */
+.rea-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--rea-color-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.rea-modal {
+  background: var(--rea-color-modal-bg);
+  border-radius: var(--rea-radius-lg);
+  box-shadow: var(--rea-shadow-modal);
+  padding: 24px;
+  width: 100%;
+  max-width: 440px;
+  position: relative;
+}
+.rea-modal__close {
+  position: absolute; top: 12px; right: 16px;
+  background: none; border: none; font-size: 24px;
+  cursor: pointer; color: var(--rea-color-text-muted); line-height: 1; padding: 0;
+}
+.rea-modal__title { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
+.rea-modal__slot-info { margin: 0 0 16px; font-size: var(--rea-font-size-sm); color: var(--rea-color-text-muted); }
+.rea-modal__form { display: flex; flex-direction: column; gap: 12px; }
+.rea-modal__label { display: flex; flex-direction: column; gap: 4px; font-size: var(--rea-font-size-sm); font-weight: 500; }
+.rea-modal__input,
+.rea-modal__textarea {
+  padding: 8px 10px;
+  border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-sm);
+  font-size: var(--rea-font-size-base);
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.rea-modal__input:focus,
+.rea-modal__textarea:focus { border-color: var(--rea-color-booked); }
+.rea-modal__textarea { resize: vertical; min-height: 80px; }
+.rea-modal__actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+.rea-modal__btn-cancel {
+  padding: 8px 16px; border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-btn); background: none; cursor: pointer;
+  font-size: var(--rea-font-size-base);
+}
+.rea-modal__btn-confirm {
+  padding: 8px 16px; border: none; border-radius: var(--rea-radius-btn);
+  background: var(--rea-color-booked); color: #fff; cursor: pointer;
+  font-size: var(--rea-font-size-base); font-weight: 500;
+}
+.rea-modal__btn-confirm:hover { background: var(--rea-color-booked-hover); }
+
+/* ── Duration Picker ─────────────────────────────────── */
+.rea-duration-picker { display: flex; flex-direction: column; gap: 4px; }
+.rea-duration-picker__options { display: flex; gap: 8px; flex-wrap: wrap; }
+.rea-duration-btn {
+  padding: 6px 16px; border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-btn); background: none;
+  cursor: pointer; font-size: var(--rea-font-size-sm);
+}
+.rea-duration-btn--active {
+  background: var(--rea-color-booked);
+  color: #fff;
+  border-color: var(--rea-color-booked);
+}
