@@ -8,9 +8,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./styles": "./src/styles/base.css"
   },
@@ -28,12 +28,13 @@
   "devDependencies": {
     "typescript": "~6.0.2",
     "tsup": "^8",
-    "vitest": "^3",
+    "vitest": "^2",
     "@testing-library/react": "^16",
     "@testing-library/user-event": "^14",
     "@testing-library/jest-dom": "^6",
-    "@vitejs/plugin-react": "^6",
-    "jsdom": "^26",
+    "@vitejs/plugin-react": "^4",
+    "vite": "^5",
+    "jsdom": "^24",
     "date-fns": "^3",
     "react": "^19",
     "react-dom": "^19"
