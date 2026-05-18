@@ -1,0 +1,41 @@
+{
+  "name": "react-easy-appointments",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "React compound-component calendar for appointment scheduling",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": "./src/styles/base.css"
+  },
+  "files": ["dist", "src/styles"],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
+    "date-fns": "^3"
+  },
+  "devDependencies": {
+    "typescript": "~6.0.2",
+    "tsup": "^8",
+    "vitest": "^3",
+    "@testing-library/react": "^16",
+    "@testing-library/user-event": "^14",
+    "@testing-library/jest-dom": "^6",
+    "@vitejs/plugin-react": "^6",
+    "jsdom": "^26",
+    "date-fns": "^3",
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}
