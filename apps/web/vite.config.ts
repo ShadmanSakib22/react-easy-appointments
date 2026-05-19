@@ -4,9 +4,8 @@ import babel from '@rolldown/plugin-babel'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
-// https://vite.dev/config/
-export default defineConfig({
-  base: process.env.VITE_BASE_URL ?? '/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/react-easy-appointments/' : '/',
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),
@@ -26,4 +25,4 @@ export default defineConfig({
       },
     ],
   },
-})
+}))
