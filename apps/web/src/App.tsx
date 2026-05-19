@@ -74,7 +74,7 @@ export default function App() {
 
         {/* Calendar */}
         <div className="w-full overflow-x-auto">
-          <div className="min-w-[545px]">
+          <div className="min-w-3xl">
             <Calendar
               slots={slots}
               onSlotClick={handleSlotClick}
