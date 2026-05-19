@@ -5,7 +5,7 @@ export function DarkModeToggle() {
 
   const base = isDark
     ? 'bg-[#0c1322] border-white/10 shadow-black/50 text-white'
-    : 'bg-white border-gray-200 shadow-black/10 text-gray-900'
+    : 'bg-white border-gray-300 shadow-black/10 text-gray-900'
 
   const label = isDark ? 'Switch to light mode' : 'Switch to dark mode'
 
@@ -16,7 +16,7 @@ export function DarkModeToggle() {
         aria-label={label}
         className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-black/5 transition-colors"
       >
-        <span className="text-[10px] font-semibold uppercase tracking-widest opacity-50">
+        <span className="text-[10px] font-semibold uppercase tracking-widest opacity-75">
           {isDark ? 'Dark Mode' : 'Light Mode'}
         </span>
         {isDark ? (

@@ -9,10 +9,10 @@ export function UserSwitcher() {
 
   const base = isDark
     ? 'bg-[#0c1322] border-white/10 shadow-black/50 text-white'
-    : 'bg-white border-gray-200 shadow-black/10 text-gray-900'
+    : 'bg-white border-gray-300 shadow-black/10 text-gray-900'
 
-  const headerBorder = isDark ? 'border-white/[0.07]' : 'border-gray-100'
-  const chevronColor = isDark ? 'text-gray-500' : 'text-gray-400'
+  const headerBorder = isDark ? 'border-white/[0.07]' : 'border-gray-200'
+  const chevronColor = isDark ? 'text-gray-400' : 'text-gray-500'
 
   return (
     <div className={`border shadow-2xl overflow-hidden transition-all duration-200 ${base}`}>
@@ -23,7 +23,7 @@ export function UserSwitcher() {
         aria-expanded={expanded}
         aria-label={expanded ? 'Collapse user switcher' : 'Expand user switcher'}
       >
-        <span className="text-[10px] font-semibold uppercase tracking-widest opacity-50">
+        <span className="text-[10px] font-semibold uppercase tracking-widest opacity-75">
           Active User
         </span>
         {/* Chevron */}
@@ -46,10 +46,10 @@ export function UserSwitcher() {
               ? 'bg-indigo-600/20 text-white'
               : 'bg-indigo-50 text-indigo-900'
             const rowIdle = isDark
-              ? 'text-gray-400 hover:bg-white/[0.05] hover:text-gray-200'
-              : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
+              ? 'text-gray-300 hover:bg-white/[0.05] hover:text-gray-200'
+              : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
             const avatarActive = 'bg-indigo-500 text-white'
-            const avatarIdle = isDark ? 'bg-white/10 text-gray-400' : 'bg-gray-100 text-gray-500'
+            const avatarIdle = isDark ? 'bg-white/10 text-gray-400' : 'bg-gray-200 text-gray-600'
 
             return (
               <button
@@ -63,7 +63,7 @@ export function UserSwitcher() {
                 </span>
                 <span className="text-sm font-medium leading-none">{user.label}</span>
                 {isActive && (
-                  <span className="ml-auto w-1.5 h-1.5 bg-indigo-400 flex-shrink-0" />
+                  <span className={`ml-auto w-1.5 h-1.5 ${isDark ? 'bg-indigo-400' : 'bg-indigo-600'} flex-shrink-0`} />
                 )}
               </button>
             )
