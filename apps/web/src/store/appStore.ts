@@ -25,7 +25,7 @@ export type StoredAppointment = {
 type AppStore = {
   slots: StoredSlot[]
   appointments: StoredAppointment[]
-  createSlot: (date: string, startTime: string, endTime: string) => void
+  createSlot: (date: string, startTime: string, endTime: string) => boolean
   createSlots: (newSlots: { date: string; startTime: string; endTime: string }[]) => void
   removeSlot: (id: string) => void
   bookSlot: (
@@ -63,37 +63,73 @@ function seedSlots(): StoredSlot[] {
   return slots
 }
 
+function timeToMinutes(timeStr: string): number {
+  const [hours, minutes] = timeStr.split(':').map(Number)
+  return hours * 60 + minutes
+}
+
+function slotsOverlap(
+  slot1: { startTime: string; endTime: string },
+  slot2: { startTime: string; endTime: string }
+): boolean {
+  const start1 = timeToMinutes(slot1.startTime)
+  const end1 = timeToMinutes(slot1.endTime)
+  const start2 = timeToMinutes(slot2.startTime)
+  const end2 = timeToMinutes(slot2.endTime)
+  return start1 < end2 && start2 < end1
+}
+
 export const useAppStore = create<AppStore>()(
   persist(
     set => ({
       slots: seedSlots(),
       appointments: [],
 
-      createSlot: (date, startTime, endTime) =>
-        set(s => ({
-          slots: [
-            ...s.slots,
-            { id: crypto.randomUUID(), date, startTime, endTime, isBooked: false },
-          ],
-        })),
+      createSlot: (date, startTime, endTime) => {
+        let success = true
+        set(s => {
+          const hasOverlap = s.slots.some(
+            sl => sl.date === date && slotsOverlap(sl, { startTime, endTime })
+          )
+          if (hasOverlap) {
+            success = false
+            return {}
+          }
+          return {
+            slots: [
+              ...s.slots,
+              { id: crypto.randomUUID(), date, startTime, endTime, isBooked: false },
+            ],
+          }
+        })
+        return success
+      },
 
       createSlots: (newSlots) =>
         set(s => {
           const currentSlots = s.slots
-          const slotsToAdd = newSlots
-            .filter(
-              n =>
-                !currentSlots.some(
-                  c => c.date === n.date && c.startTime === n.startTime && c.endTime === n.endTime
-                )
-            )
-            .map(n => ({
-              id: crypto.randomUUID(),
-              date: n.date,
-              startTime: n.startTime,
-              endTime: n.endTime,
-              isBooked: false,
-            }))
+          const slotsToAdd: StoredSlot[] = []
+
+          for (const newSl of newSlots) {
+            const hasOverlap =
+              currentSlots.some(
+                c => c.date === newSl.date && slotsOverlap(c, newSl)
+              ) ||
+              slotsToAdd.some(
+                a => a.date === newSl.date && slotsOverlap(a, newSl)
+              )
+
+            if (!hasOverlap) {
+              slotsToAdd.push({
+                id: crypto.randomUUID(),
+                date: newSl.date,
+                startTime: newSl.startTime,
+                endTime: newSl.endTime,
+                isBooked: false,
+              })
+            }
+          }
+
           return { slots: [...s.slots, ...slotsToAdd] }
         }),
 

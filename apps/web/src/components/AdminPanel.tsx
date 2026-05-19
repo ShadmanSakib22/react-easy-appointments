@@ -15,7 +15,11 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
   function handleCreateSlot(e: React.FormEvent) {
     e.preventDefault()
     if (!date || !startTime || !endTime) return
-    createSlot(date, startTime, endTime)
+    const success = createSlot(date, startTime, endTime)
+    if (!success) {
+      alert('Error: This slot overlaps with an existing slot on the same date.')
+      return
+    }
     setDate('')
     setStartTime('')
     setEndTime('')
