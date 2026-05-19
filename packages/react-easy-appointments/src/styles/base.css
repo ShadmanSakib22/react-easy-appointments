@@ -1,291 +1,1103 @@
-/* react-easy-appointments — default theme
-   Override any variable on .rea-calendar or its descendants */
+/* ============================================================
+   react-easy-appointments — base.css
+   Semantic token system · Light & dark themes · v0.2
+   ============================================================ */
 
+/* ── Token definitions: Light theme (default) ─────────────── */
 .rea-calendar {
-  --rea-color-available:       #22c55e;
-  --rea-color-available-hover: #16a34a;
-  --rea-color-booked:          #3b82f6;
-  --rea-color-booked-hover:    #2563eb;
-  --rea-color-unavailable:     #d1d5db;
-  --rea-color-text:            #111827;
-  --rea-color-text-muted:      #6b7280;
-  --rea-color-bg:              #ffffff;
-  --rea-color-border:          #e5e7eb;
-  --rea-color-today:           #eff6ff;
-  --rea-color-outside:         #f9fafb;
-  --rea-color-modal-backdrop:  rgba(0, 0, 0, 0.5);
-  --rea-color-modal-bg:        #ffffff;
-  --rea-font-family:           inherit;
-  --rea-font-size-base:        14px;
-  --rea-font-size-sm:          12px;
-  --rea-radius-sm:             4px;
-  --rea-radius-md:             8px;
-  --rea-radius-lg:             12px;
-  --rea-radius-btn:            6px;
-  --rea-shadow-modal:          0 20px 60px rgba(0, 0, 0, 0.15);
-  --rea-cell-min-height:       80px;
-  --rea-cell-padding:          8px;
-  --rea-toolbar-height:        48px;
-  --rea-time-gutter-width:     60px;
-  --rea-week-row-height:       56px;
+  /* Surfaces */
+  --rea-bg-base: #ffffff;
+  --rea-bg-elevated: #ffffff;
+  --rea-bg-subtle: #f8f9fb;
+  --rea-bg-wash: #eef4ff;
+  --rea-bg-overlay: rgba(15, 23, 42, 0.45);
 
+  /* Borders */
+  --rea-border-default: #e2e6ed;
+  --rea-border-focus: #3b6ff5;
+
+  /* Text */
+  --rea-text-primary: #0f172a;
+  --rea-text-secondary: #64748b;
+  --rea-text-disabled: #b0b8c4;
+  --rea-text-on-accent: #ffffff;
+
+  /* Slot states */
+  --rea-slot-available-bg: #16a34a;
+  --rea-slot-available-bg-hover: #15803d;
+  --rea-slot-available-text: #ffffff;
+  --rea-slot-booked-bg: #3b6ff5;
+  --rea-slot-booked-text: #ffffff;
+  --rea-slot-unavailable-bg: #e9ecf0;
+  --rea-slot-unavailable-text: #94a3b8;
+
+  /* Buttons */
+  --rea-btn-primary-bg: #3b6ff5;
+  --rea-btn-primary-bg-hover: #2d5ce8;
+  --rea-btn-primary-text: #ffffff;
+  --rea-btn-ghost-border: #e2e6ed;
+  --rea-btn-ghost-bg-hover: #f1f5f9;
+
+  /* Today accent */
+  --rea-today-indicator: #3b6ff5;
+
+  /* Motion */
+  --rea-duration-fast: 100ms;
+  --rea-duration-base: 160ms;
+  --rea-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Shadows */
+  --rea-shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.05);
+  --rea-shadow-modal: 0 24px 64px rgba(15, 23, 42, 0.14), 0 4px 16px rgba(15, 23, 42, 0.08);
+  --rea-shadow-focus: 0 0 0 3px rgba(59, 111, 245, 0.22);
+
+  /* Shape */
+  --rea-radius-sm: 3px;
+  --rea-radius-md: 6px;
+  --rea-radius-lg: 10px;
+  --rea-radius-btn: 6px;
+  --rea-radius-pill: 999px;
+
+  /* Layout */
+  --rea-cell-min-height: 88px;
+  --rea-cell-padding: 6px;
+  --rea-toolbar-height: 52px;
+  --rea-time-gutter-width: 56px;
+  --rea-week-row-height: 60px;
+
+  /* Typography */
+  --rea-font-family: inherit;
+  --rea-font-size-base: 13px;
+  --rea-font-size-sm: 11px;
+  --rea-font-size-xs: 10px;
+
+  /* Backward-compat aliases for v0.1 consumers */
+  --rea-color-available: var(--rea-slot-available-bg);
+  --rea-color-available-hover: var(--rea-slot-available-bg-hover);
+  --rea-color-booked: var(--rea-slot-booked-bg);
+  --rea-color-booked-hover: var(--rea-btn-primary-bg-hover);
+  --rea-color-unavailable: var(--rea-slot-unavailable-bg);
+  --rea-color-text: var(--rea-text-primary);
+  --rea-color-text-muted: var(--rea-text-secondary);
+  --rea-color-bg: var(--rea-bg-base);
+  --rea-color-border: var(--rea-border-default);
+  --rea-color-today: var(--rea-bg-wash);
+  --rea-color-outside: var(--rea-bg-subtle);
+  --rea-color-modal-backdrop: var(--rea-bg-overlay);
+  --rea-color-modal-bg: var(--rea-bg-elevated);
+}
+
+/* ── Token definitions: Dark theme ────────────────────────── */
+.rea-calendar.rea-dark,
+[data-theme="dark"] .rea-calendar {
+  --rea-bg-base: #0f172a;
+  --rea-bg-elevated: #1e293b;
+  --rea-bg-subtle: #162032;
+  --rea-bg-wash: #1a2744;
+  --rea-bg-overlay: rgba(0, 0, 0, 0.6);
+
+  --rea-border-default: #2a3a52;
+  --rea-border-focus: #6b9aff;
+
+  --rea-text-primary: #f1f5f9;
+  --rea-text-secondary: #94a3b8;
+  --rea-text-disabled: #3f5068;
+  --rea-text-on-accent: #ffffff;
+
+  --rea-slot-available-bg: #16803d;
+  --rea-slot-available-bg-hover: #15a050;
+  --rea-slot-available-text: #ffffff;
+  --rea-slot-booked-bg: #2d5ce8;
+  --rea-slot-booked-text: #ffffff;
+  --rea-slot-unavailable-bg: #1a2640;
+  --rea-slot-unavailable-text: #475569;
+
+  --rea-btn-primary-bg: #3b6ff5;
+  --rea-btn-primary-bg-hover: #5a8aff;
+  --rea-btn-primary-text: #ffffff;
+  --rea-btn-ghost-border: #2a3a52;
+  --rea-btn-ghost-bg-hover: #1e293b;
+
+  --rea-today-indicator: #6b9aff;
+
+  --rea-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --rea-shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+  --rea-shadow-focus: 0 0 0 3px rgba(107, 154, 255, 0.28);
+}
+
+/* ── Base reset ───────────────────────────────────────────── */
+.rea-calendar {
   font-family: var(--rea-font-family);
   font-size: var(--rea-font-size-base);
-  color: var(--rea-color-text);
+  color: var(--rea-text-primary);
+  background: var(--rea-bg-base);
   box-sizing: border-box;
+  line-height: 1.4;
 }
 
 .rea-calendar *,
 .rea-calendar *::before,
-.rea-calendar *::after { box-sizing: inherit; }
+.rea-calendar *::after {
+  box-sizing: inherit;
+}
 
-/* ── Toolbar ─────────────────────────────────────────── */
+/* Reduced motion — disable all transitions and animations */
+@media (prefers-reduced-motion: reduce) {
+
+  .rea-calendar *,
+  .rea-calendar *::before,
+  .rea-calendar *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   TOOLBAR
+   ═══════════════════════════════════════════════════════════ */
 .rea-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  gap: 12px;
+  padding: 0 14px;
   height: var(--rea-toolbar-height);
-  background: var(--rea-color-bg);
-  border-bottom: 1px solid var(--rea-color-border);
-}
-.rea-toolbar__nav { display: flex; gap: 4px; }
-.rea-toolbar button {
-  background: none;
-  border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-btn);
-  padding: 4px 10px;
-  cursor: pointer;
-  font-size: var(--rea-font-size-base);
-  color: var(--rea-color-text);
-  transition: background 0.15s;
-}
-.rea-toolbar button:hover { background: var(--rea-color-border); }
-.rea-toolbar__title { font-weight: 600; font-size: 16px; }
-.rea-toolbar__views { display: flex; gap: 4px; }
-.rea-toolbar__view-btn--active {
-  background: var(--rea-color-booked) !important;
-  color: #fff !important;
-  border-color: var(--rea-color-booked) !important;
+  background: var(--rea-bg-base);
+  border-bottom: 1px solid var(--rea-border-default);
 }
 
-/* ── Month View ──────────────────────────────────────── */
-.rea-month-view {
-  border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-md);
-  overflow: hidden;
+/* Nav cluster: ‹ Today › */
+.rea-toolbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
+
+/* All toolbar buttons share a ghost base */
+.rea-toolbar__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 30px;
+  padding: 0 10px;
+  background: transparent;
+  border: 1px solid var(--rea-btn-ghost-border);
+  border-radius: var(--rea-radius-btn);
+  color: var(--rea-text-primary);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--rea-duration-fast) ease-out,
+    border-color var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.rea-toolbar__btn:hover {
+  background: var(--rea-btn-ghost-bg-hover);
+  border-color: var(--rea-text-disabled);
+}
+
+.rea-toolbar__btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+/* Chevron nav buttons — square, smaller */
+.rea-toolbar__btn--nav {
+  width: 30px;
+  padding: 0;
+}
+
+/* SVG chevron icons */
+.rea-toolbar__btn--nav svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Title */
+.rea-toolbar__title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--rea-text-primary);
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Segmented control: Month / Week */
+.rea-toolbar__views {
+  display: flex;
+  align-items: center;
+  background: var(--rea-bg-subtle);
+  border: 1px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-btn);
+  padding: 2px;
+  gap: 0;
+}
+
+.rea-toolbar__view-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--rea-radius-btn) - 2px);
+  color: var(--rea-text-secondary);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.rea-toolbar__view-btn:hover {
+  color: var(--rea-text-primary);
+}
+
+.rea-toolbar__view-btn--active,
+.rea-toolbar__view-btn[aria-pressed="true"] {
+  background: var(--rea-bg-elevated);
+  color: var(--rea-text-primary);
+  font-weight: 600;
+  box-shadow: var(--rea-shadow-sm);
+}
+
+.rea-toolbar__view-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MONTH VIEW
+   ═══════════════════════════════════════════════════════════ */
+.rea-month-view {
+  border: 1px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-lg);
+  overflow: hidden;
+  background: var(--rea-border-default);
+  /* gap color via background trick */
+}
+
+/* Day name header row */
 .rea-month-view__header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: var(--rea-color-outside);
-  border-bottom: 1px solid var(--rea-color-border);
+  background: var(--rea-bg-subtle);
+  border-bottom: 1px solid var(--rea-border-default);
+  gap: 0;
 }
+
 .rea-month-view__day-name {
-  padding: 8px;
+  padding: 8px 6px 7px;
   text-align: center;
-  font-size: var(--rea-font-size-sm);
-  font-weight: 600;
-  color: var(--rea-color-text-muted);
+  font-size: var(--rea-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  color: var(--rea-text-secondary);
+  background: var(--rea-bg-subtle);
 }
+
+/* Calendar grid — 1px gaps render as the border-default color */
 .rea-month-view__grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
 }
+
+/* Individual cell */
 .rea-month-cell {
   min-height: var(--rea-cell-min-height);
   padding: var(--rea-cell-padding);
-  border-right: 1px solid var(--rea-color-border);
-  border-bottom: 1px solid var(--rea-color-border);
-  background: var(--rea-color-bg);
+  background: var(--rea-bg-base);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
-.rea-month-cell:nth-child(7n) { border-right: none; }
-.rea-month-cell--outside {
-  background: var(--rea-color-outside);
-  color: var(--rea-color-text-muted);
-}
-.rea-month-cell--today { background: var(--rea-color-today); }
-.rea-month-cell__date { display: block; font-size: var(--rea-font-size-sm); font-weight: 500; margin-bottom: 4px; }
-.rea-month-cell__slots { display: flex; flex-direction: column; gap: 2px; }
 
-/* ── Week View ───────────────────────────────────────── */
-.rea-week-view {
-  border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-md);
-  overflow: hidden;
+.rea-month-cell--outside {
+  background: var(--rea-bg-subtle);
 }
+
+.rea-month-cell--outside .rea-month-cell__date {
+  color: var(--rea-text-disabled);
+}
+
+.rea-month-cell--today {
+  background: var(--rea-bg-wash);
+}
+
+/* Date number */
+.rea-month-cell__date {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2px;
+}
+
+.rea-month-cell__date-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  font-size: var(--rea-font-size-sm);
+  font-weight: 500;
+  color: var(--rea-text-primary);
+  border-radius: var(--rea-radius-pill);
+  line-height: 1;
+}
+
+.rea-month-cell--today .rea-month-cell__date-number {
+  background: var(--rea-today-indicator);
+  color: var(--rea-text-on-accent);
+  font-weight: 700;
+}
+
+/* Slots container */
+.rea-month-cell__slots {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+/* Overflow pill */
+.rea-month-cell__overflow {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-sm);
+  font-size: var(--rea-font-size-xs);
+  font-weight: 500;
+  color: var(--rea-text-secondary);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--rea-font-family);
+  transition: background var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out;
+}
+
+.rea-month-cell__overflow:hover {
+  background: var(--rea-btn-ghost-bg-hover);
+  color: var(--rea-text-primary);
+}
+
+.rea-month-cell__overflow:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   WEEK VIEW
+   ═══════════════════════════════════════════════════════════ */
+.rea-week-view {
+  border: 1px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-lg);
+  overflow: hidden;
+  background: var(--rea-bg-base);
+}
+
+/* Header row */
 .rea-week-view__header {
   display: grid;
   grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
-  border-bottom: 1px solid var(--rea-color-border);
-  background: var(--rea-color-outside);
+  background: var(--rea-bg-subtle);
+  border-bottom: 1px solid var(--rea-border-default);
 }
+
+.rea-week-view__time-gutter-header {
+  /* spacer above time labels */
+}
+
 .rea-week-view__day-header {
-  padding: 8px 4px;
+  padding: 8px 4px 6px;
   text-align: center;
-  font-size: var(--rea-font-size-sm);
-  font-weight: 600;
+  border-left: 1px solid var(--rea-border-default);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  border-left: 1px solid var(--rea-color-border);
+  gap: 3px;
 }
-.rea-week-view__grid { overflow-y: auto; max-height: 600px; }
+
+.rea-week-view__day-abbr {
+  font-size: var(--rea-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rea-text-secondary);
+  line-height: 1;
+}
+
+.rea-week-view__day-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--rea-text-primary);
+  border-radius: var(--rea-radius-pill);
+  line-height: 1;
+}
+
+.rea-week-view__day-header--today .rea-week-view__day-num {
+  background: var(--rea-today-indicator);
+  color: var(--rea-text-on-accent);
+}
+
+/* Scrollable grid */
+.rea-week-view__grid {
+  overflow-y: auto;
+  max-height: 600px;
+}
+
+/* Hour row */
 .rea-week-view__row {
   display: grid;
   grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
   min-height: var(--rea-week-row-height);
-  border-bottom: 1px solid var(--rea-color-border);
+  border-bottom: 1px solid var(--rea-border-default);
+  position: relative;
 }
+
+/* Alternate-hour subtle tint */
+.rea-week-view__row:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.rea-calendar.rea-dark .rea-week-view__row:nth-child(even),
+[data-theme="dark"] .rea-calendar .rea-week-view__row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* Time label */
 .rea-week-view__time-label {
-  padding: 4px 8px;
-  font-size: var(--rea-font-size-sm);
-  color: var(--rea-color-text-muted);
+  padding: 8px 8px 0 0;
+  font-size: var(--rea-font-size-xs);
+  color: var(--rea-text-secondary);
   text-align: right;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  flex-shrink: 0;
 }
+
+/* Day cell */
 .rea-week-view__cell {
-  border-left: 1px solid var(--rea-color-border);
-  padding: 2px;
+  border-left: 1px solid var(--rea-border-default);
+  padding: 2px 3px;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-/* ── Slot Blocks ─────────────────────────────────────── */
+.rea-week-view__cell--today {
+  background: var(--rea-bg-wash);
+}
+
+/* Current-time indicator — 2px line + 6px dot on left */
+.rea-week-view__now-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--rea-today-indicator);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.rea-week-view__now-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rea-today-indicator);
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   SLOT BLOCKS (shared: month pills + week blocks)
+   ═══════════════════════════════════════════════════════════ */
 .rea-slot {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
+  min-height: 20px;
   padding: 2px 6px;
   border: none;
   border-radius: var(--rea-radius-sm);
-  font-size: var(--rea-font-size-sm);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-align: left;
   cursor: pointer;
-  transition: opacity 0.15s;
-  color: #fff;
-  font-weight: 500;
+  color: var(--rea-text-on-accent);
+  transition: transform var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out,
+    background var(--rea-duration-fast) ease-out;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  gap: 4px;
 }
-.rea-slot--available { background: var(--rea-color-available); }
-.rea-slot--available:hover { background: var(--rea-color-available-hover); }
-.rea-slot--booked { background: var(--rea-color-booked); cursor: default; }
-.rea-slot--unavailable {
-  background: var(--rea-color-unavailable);
-  color: var(--rea-color-text-muted);
-  cursor: not-allowed;
-}
-.rea-slot__label { display: block; font-size: 10px; opacity: 0.85; }
 
-/* ── Booking Modal ───────────────────────────────────── */
+/* State: available */
+.rea-slot--available {
+  background: var(--rea-slot-available-bg);
+  color: var(--rea-slot-available-text);
+}
+
+.rea-slot--available:hover {
+  background: var(--rea-slot-available-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--rea-shadow-sm);
+}
+
+.rea-slot--available:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+/* State: booked */
+.rea-slot--booked {
+  background: var(--rea-slot-booked-bg);
+  color: var(--rea-slot-booked-text);
+  cursor: default;
+  opacity: 0.9;
+}
+
+/* State: unavailable */
+.rea-slot--unavailable {
+  background: var(--rea-slot-unavailable-bg);
+  color: var(--rea-slot-unavailable-text);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Booked-by label inside slot */
+.rea-slot__label {
+  font-size: var(--rea-font-size-xs);
+  font-weight: 400;
+  opacity: 0.82;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+/* Week view slot variant — left-border block style */
+.rea-week-view .rea-slot {
+  min-height: 28px;
+  padding: 3px 6px 3px 8px;
+  border-left: 3px solid transparent;
+  border-radius: 0 var(--rea-radius-sm) var(--rea-radius-sm) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.rea-week-view .rea-slot--available {
+  border-left-color: var(--rea-slot-available-bg);
+  background: color-mix(in srgb, var(--rea-slot-available-bg) 14%, transparent);
+  color: var(--rea-slot-available-bg);
+}
+
+.rea-calendar.rea-dark .rea-week-view .rea-slot--available,
+[data-theme="dark"] .rea-calendar .rea-week-view .rea-slot--available {
+  background: color-mix(in srgb, var(--rea-slot-available-bg) 20%, transparent);
+}
+
+.rea-week-view .rea-slot--available:hover {
+  background: color-mix(in srgb, var(--rea-slot-available-bg) 22%, transparent);
+}
+
+.rea-week-view .rea-slot--booked {
+  border-left-color: var(--rea-slot-booked-bg);
+  background: color-mix(in srgb, var(--rea-slot-booked-bg) 14%, transparent);
+  color: var(--rea-slot-booked-bg);
+}
+
+.rea-calendar.rea-dark .rea-week-view .rea-slot--booked,
+[data-theme="dark"] .rea-calendar .rea-week-view .rea-slot--booked {
+  background: color-mix(in srgb, var(--rea-slot-booked-bg) 20%, transparent);
+}
+
+.rea-week-view .rea-slot--unavailable {
+  border-left-color: var(--rea-slot-unavailable-text);
+  background: var(--rea-slot-unavailable-bg);
+  color: var(--rea-slot-unavailable-text);
+}
+
+.rea-week-view .rea-slot__time {
+  font-weight: 600;
+  font-size: var(--rea-font-size-xs);
+  line-height: 1.2;
+}
+
+.rea-week-view .rea-slot__label {
+  font-size: var(--rea-font-size-xs);
+  font-weight: 400;
+  opacity: 0.75;
+  line-height: 1.2;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL — shared backdrop + panel
+   ═══════════════════════════════════════════════════════════ */
 .rea-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: var(--rea-color-modal-backdrop);
+  background: var(--rea-bg-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 16px;
+  animation: rea-backdrop-in var(--rea-duration-base) ease-out both;
 }
+
+@keyframes rea-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .rea-modal {
-  background: var(--rea-color-modal-bg);
+  background: var(--rea-bg-elevated);
+  border: 1px solid var(--rea-border-default);
   border-radius: var(--rea-radius-lg);
   box-shadow: var(--rea-shadow-modal);
-  padding: 24px;
+  padding: 28px;
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
   position: relative;
+  animation: rea-modal-in var(--rea-duration-base) var(--rea-ease-out) both;
 }
-.rea-modal__close {
-  position: absolute; top: 12px; right: 16px;
-  background: none; border: none; font-size: 24px;
-  cursor: pointer; color: var(--rea-color-text-muted); line-height: 1; padding: 0;
-}
-.rea-modal__title { margin: 0 0 4px; font-size: 18px; font-weight: 600; }
-.rea-modal__slot-info { margin: 0 0 16px; font-size: var(--rea-font-size-sm); color: var(--rea-color-text-muted); }
-.rea-modal__form { display: flex; flex-direction: column; gap: 12px; }
-.rea-modal__label { display: flex; flex-direction: column; gap: 4px; font-size: var(--rea-font-size-sm); font-weight: 500; }
-.rea-modal__input,
-.rea-modal__textarea {
-  padding: 8px 10px;
-  border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-sm);
-  font-size: var(--rea-font-size-base);
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.15s;
-}
-.rea-modal__input:focus,
-.rea-modal__textarea:focus { border-color: var(--rea-color-booked); }
-.rea-modal__textarea { resize: vertical; min-height: 80px; }
-.rea-modal__actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
-.rea-modal__btn-cancel {
-  padding: 8px 16px; border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-btn); background: none; cursor: pointer;
-  font-size: var(--rea-font-size-base);
-}
-.rea-modal__btn-confirm {
-  padding: 8px 16px; border: none; border-radius: var(--rea-radius-btn);
-  background: var(--rea-color-booked); color: #fff; cursor: pointer;
-  font-size: var(--rea-font-size-base); font-weight: 500;
-}
-.rea-modal__btn-confirm:hover { background: var(--rea-color-booked-hover); }
 
-/* ── Quick Generate Modal ────────────────────────────── */
+@keyframes rea-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Close button */
+.rea-modal__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--rea-radius-md);
+  color: var(--rea-text-secondary);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out;
+}
+
+.rea-modal__close:hover {
+  background: var(--rea-btn-ghost-bg-hover);
+  color: var(--rea-text-primary);
+}
+
+.rea-modal__close:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+.rea-modal__close svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Slot context badge */
+.rea-modal__slot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  background: color-mix(in srgb, var(--rea-slot-available-bg) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--rea-slot-available-bg) 30%, transparent);
+  border-radius: var(--rea-radius-pill);
+  color: var(--rea-slot-available-bg);
+  font-size: var(--rea-font-size-sm);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.rea-calendar.rea-dark .rea-modal__slot-badge,
+[data-theme="dark"] .rea-calendar .rea-modal__slot-badge {
+  background: color-mix(in srgb, var(--rea-slot-available-bg) 18%, transparent);
+  color: var(--rea-slot-available-bg-hover);
+}
+
+.rea-modal__slot-badge svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Modal title */
+.rea-modal__title {
+  margin: 0 0 20px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--rea-text-primary);
+  line-height: 1.3;
+  padding-right: 32px;
+  /* clear close btn */
+}
+
+/* Divider */
+.rea-modal__divider {
+  height: 1px;
+  background: var(--rea-border-default);
+  margin: 0 0 20px;
+}
+
+/* Form */
+.rea-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rea-modal__label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: var(--rea-font-size-sm);
+  font-weight: 600;
+  color: var(--rea-text-secondary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.rea-modal__input,
+.rea-modal__textarea,
+.rea-modal__select {
+  padding: 8px 10px;
+  background: var(--rea-bg-base);
+  border: 1.5px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-md);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-base);
+  color: var(--rea-text-primary);
+  outline: none;
+  transition: border-color var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out;
+  width: 100%;
+}
+
+.rea-modal__input::placeholder,
+.rea-modal__textarea::placeholder {
+  color: var(--rea-text-disabled);
+}
+
+.rea-modal__input:focus,
+.rea-modal__textarea:focus,
+.rea-modal__select:focus {
+  border-color: var(--rea-border-focus);
+  box-shadow: var(--rea-shadow-focus);
+}
+
+.rea-modal__textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.rea-modal__select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+/* Actions row */
+.rea-modal__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+/* Ghost / cancel button */
+.rea-modal__btn-cancel {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  background: transparent;
+  border: 1.5px solid var(--rea-btn-ghost-border);
+  border-radius: var(--rea-radius-btn);
+  color: var(--rea-text-secondary);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-base);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out,
+    border-color var(--rea-duration-fast) ease-out;
+}
+
+.rea-modal__btn-cancel:hover {
+  background: var(--rea-btn-ghost-bg-hover);
+  color: var(--rea-text-primary);
+  border-color: var(--rea-text-disabled);
+}
+
+.rea-modal__btn-cancel:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+/* Primary / confirm button */
+.rea-modal__btn-confirm {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 18px;
+  background: var(--rea-btn-primary-bg);
+  border: none;
+  border-radius: var(--rea-radius-btn);
+  color: var(--rea-btn-primary-text);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--rea-duration-fast) ease-out,
+    transform var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out;
+}
+
+.rea-modal__btn-confirm:hover {
+  background: var(--rea-btn-primary-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--rea-shadow-sm);
+}
+
+.rea-modal__btn-confirm:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+.rea-modal__btn-confirm svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* 2-col grid inside modal (date range, time range) */
 .rea-modal__grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+
+/* Day selector pills */
 .rea-modal__days-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
   gap: 4px;
-  margin-top: 4px;
+  margin-top: 5px;
+  flex-wrap: wrap;
 }
+
 .rea-modal__day-btn {
-  padding: 6px 4px;
-  border: 1px solid var(--rea-color-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 32px;
+  padding: 0 8px;
+  background: transparent;
+  border: 1.5px solid var(--rea-btn-ghost-border);
+  border-radius: var(--rea-radius-md);
+  color: var(--rea-text-secondary);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out,
+    border-color var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out;
+}
+
+.rea-modal__day-btn:hover {
+  background: var(--rea-btn-ghost-bg-hover);
+  color: var(--rea-text-primary);
+  border-color: var(--rea-text-disabled);
+}
+
+.rea-modal__day-btn--active {
+  background: var(--rea-btn-primary-bg) !important;
+  color: var(--rea-btn-primary-text) !important;
+  border-color: var(--rea-btn-primary-bg) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+.rea-modal__day-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+/* Duration segmented control */
+.rea-modal__duration-track {
+  display: flex;
+  align-items: center;
+  background: var(--rea-bg-subtle);
+  border: 1.5px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-md);
+  padding: 2px;
+  gap: 0;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.rea-modal__duration-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 36px;
+  height: 28px;
+  padding: 0 6px;
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--rea-radius-md) - 2px);
+  color: var(--rea-text-secondary);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--rea-duration-fast) ease-out,
+    color var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out;
+}
+
+.rea-modal__duration-btn:hover {
+  color: var(--rea-text-primary);
+}
+
+.rea-modal__duration-btn--active {
+  background: var(--rea-bg-elevated);
+  color: var(--rea-text-primary);
+  font-weight: 600;
+  box-shadow: var(--rea-shadow-sm);
+}
+
+.rea-modal__duration-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+/* Generate / primary-full button */
+.rea-modal__btn-generate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  height: 40px;
+  background: var(--rea-btn-primary-bg);
+  border: none;
+  border-radius: var(--rea-radius-btn);
+  color: var(--rea-btn-primary-text);
+  font-family: var(--rea-font-family);
+  font-size: var(--rea-font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background var(--rea-duration-fast) ease-out,
+    transform var(--rea-duration-fast) ease-out,
+    box-shadow var(--rea-duration-fast) ease-out;
+}
+
+.rea-modal__btn-generate:hover {
+  background: var(--rea-btn-primary-bg-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--rea-shadow-sm);
+}
+
+.rea-modal__btn-generate:focus-visible {
+  outline: none;
+  box-shadow: var(--rea-shadow-focus);
+}
+
+/* Legacy — keep rea-duration-picker working for any custom usage */
+.rea-duration-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rea-duration-picker__options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rea-duration-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--rea-border-default);
   border-radius: var(--rea-radius-btn);
   background: none;
   cursor: pointer;
   font-size: var(--rea-font-size-sm);
-  text-align: center;
-  font-weight: 500;
-  transition: background 0.15s, border-color 0.15s;
-}
-.rea-modal__day-btn:hover {
-  background: var(--rea-color-border);
-}
-.rea-modal__day-btn--active {
-  background: var(--rea-color-booked) !important;
-  color: #fff !important;
-  border-color: var(--rea-color-booked) !important;
-}
-.rea-modal__select {
-  padding: 8px 10px;
-  border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-sm);
-  font-size: var(--rea-font-size-base);
-  font-family: inherit;
-  outline: none;
-  background: var(--rea-color-bg);
-  cursor: pointer;
-}
-.rea-modal__select:focus {
-  border-color: var(--rea-color-booked);
+  font-family: var(--rea-font-family);
+  color: var(--rea-text-primary);
+  transition: background var(--rea-duration-fast) ease-out;
 }
 
-/* ── Duration Picker ─────────────────────────────────── */
-.rea-duration-picker { display: flex; flex-direction: column; gap: 4px; }
-.rea-duration-picker__options { display: flex; gap: 8px; flex-wrap: wrap; }
-.rea-duration-btn {
-  padding: 6px 16px; border: 1px solid var(--rea-color-border);
-  border-radius: var(--rea-radius-btn); background: none;
-  cursor: pointer; font-size: var(--rea-font-size-sm);
-}
 .rea-duration-btn--active {
-  background: var(--rea-color-booked);
-  color: #fff;
-  border-color: var(--rea-color-booked);
+  background: var(--rea-btn-primary-bg);
+  color: var(--rea-btn-primary-text);
+  border-color: var(--rea-btn-primary-bg);
 }
