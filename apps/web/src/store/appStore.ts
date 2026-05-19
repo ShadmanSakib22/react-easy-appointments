@@ -82,26 +82,29 @@ export const useAppStore = create<AppStore>()(
         })),
 
       bookSlot: (slotId, userId, userLabel, subject, notes, durationMinutes) =>
-        set(s => ({
-          slots: s.slots.map(sl =>
-            sl.id === slotId
-              ? { ...sl, isBooked: true, bookedByUserId: userId, bookedByLabel: userLabel }
-              : sl,
-          ),
-          appointments: [
-            ...s.appointments,
-            {
-              id: crypto.randomUUID(),
-              slotId,
-              userId,
-              userLabel,
-              subject,
-              notes,
-              durationMinutes,
-              status: 'confirmed',
-            },
-          ],
-        })),
+        set(s => {
+          if (s.slots.find(sl => sl.id === slotId)?.isBooked) return s
+          return {
+            slots: s.slots.map(sl =>
+              sl.id === slotId
+                ? { ...sl, isBooked: true, bookedByUserId: userId, bookedByLabel: userLabel }
+                : sl,
+            ),
+            appointments: [
+              ...s.appointments,
+              {
+                id: crypto.randomUUID(),
+                slotId,
+                userId,
+                userLabel,
+                subject,
+                notes,
+                durationMinutes,
+                status: 'confirmed',
+              },
+            ],
+          }
+        }),
 
       cancelAppointment: (id) =>
         set(s => {
