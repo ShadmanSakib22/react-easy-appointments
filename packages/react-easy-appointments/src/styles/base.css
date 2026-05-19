@@ -308,7 +308,7 @@
 /* Day name header row */
 .rea-month-view__header {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   background: var(--rea-bg-subtle);
   border-bottom: 1px solid var(--rea-border-default);
   gap: 0;
@@ -328,7 +328,7 @@
 /* Calendar grid — 1px gaps render as the border-default color */
 .rea-month-view__grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 1px;
 }
 
@@ -430,7 +430,7 @@
 /* Header row — sticky inside scroll wrapper so it stays visible while scrolling */
 .rea-week-view__header {
   display: grid;
-  grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
+  grid-template-columns: var(--rea-time-gutter-width) repeat(7, minmax(0, 1fr));
   background: var(--rea-bg-subtle);
   border-bottom: 1px solid var(--rea-border-default);
   position: sticky;
@@ -510,7 +510,7 @@
 /* Hour row */
 .rea-week-view__row {
   display: grid;
-  grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
+  grid-template-columns: var(--rea-time-gutter-width) repeat(7, minmax(0, 1fr));
   min-height: var(--rea-week-row-height);
   border-bottom: 1px solid var(--rea-border-default);
   position: relative;
@@ -582,6 +582,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  min-width: 0;
   min-height: 20px;
   padding: 2px 6px;
   border: none;
@@ -644,6 +645,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
+  min-width: 0;
 }
 
 /* Week view slot variant — left-border block style */
