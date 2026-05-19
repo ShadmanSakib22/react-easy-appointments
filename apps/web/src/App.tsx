@@ -47,7 +47,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
       <div className="fixed bottom-5 right-5 z-50 w-[160px] space-y-2">
         <DarkModeToggle />
         <UserSwitcher />
