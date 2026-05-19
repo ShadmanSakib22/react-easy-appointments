@@ -1,30 +1,30 @@
 import { useState } from 'react'
 import { useCalendarContext } from '../Calendar/CalendarContext'
-import { DurationPicker } from './DurationPicker'
 import type { Slot, BookingFormData } from '../../types'
 
 type Props = {
   slot: Slot | null
   open: boolean
   onClose: () => void
-  durations?: number[]
 }
 
-export function BookingModal({ slot, open, onClose, durations = [30, 60, 90] }: Props) {
+export function BookingModal({ slot, open, onClose }: Props) {
   const { onBook, headless } = useCalendarContext()
   const [subject, setSubject] = useState('')
   const [notes, setNotes] = useState('')
-  const [duration, setDuration] = useState(durations[0])
 
   if (!open || !slot) return null
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const data: BookingFormData = { subject, notes, durationMinutes: duration }
+    const durationMinutes = (
+      (Number(slot.endTime.split(':')[0]) * 60 + Number(slot.endTime.split(':')[1])) -
+      (Number(slot.startTime.split(':')[0]) * 60 + Number(slot.startTime.split(':')[1]))
+    )
+    const data: BookingFormData = { subject, notes, durationMinutes }
     onBook(slot, data)
     setSubject('')
     setNotes('')
-    setDuration(durations[0])
     onClose()
   }
 
@@ -69,12 +69,6 @@ export function BookingModal({ slot, open, onClose, durations = [30, 60, 90] }: 
               placeholder="Optional notes"
             />
           </label>
-          <DurationPicker
-            durations={durations}
-            value={duration}
-            onChange={setDuration}
-            headless={headless}
-          />
           <div className={headless ? undefined : 'rea-modal__actions'}>
             <button
               type="button"

@@ -64,7 +64,6 @@ export default function App() {
                 slot={selectedSlot}
                 open={modalOpen}
                 onClose={() => { setModalOpen(false); setSelectedSlot(null) }}
-                durations={[30, 60, 90]}
               />
             </Calendar>
           </div>
