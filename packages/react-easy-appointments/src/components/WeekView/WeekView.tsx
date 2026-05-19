@@ -18,7 +18,7 @@ function getNowMinutes(): number {
 
 export function WeekView() {
   const { view, currentDate, slots, weekStartsOn, headless, weekHourStart, weekHourEnd } = useCalendarContext()
-  const HOURS = Array.from({ length: weekHourEnd - weekHourStart }, (_, i) => i + weekHourStart)
+  const HOURS = Array.from({ length: weekHourEnd - weekHourStart + 1 }, (_, i) => i + weekHourStart)
   const [nowMinutes, setNowMinutes] = useState(getNowMinutes)
 
   useEffect(() => {
