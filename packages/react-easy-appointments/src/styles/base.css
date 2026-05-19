@@ -273,11 +273,17 @@
 
 .rea-toolbar__view-btn--active,
 .rea-toolbar__view-btn[aria-pressed="true"] {
-  background: var(--rea-bg-elevated);
-  color: var(--rea-text-primary);
+  background: var(--rea-btn-primary-bg);
+  color: var(--rea-text-on-accent);
   font-weight: 600;
   box-shadow: var(--rea-shadow-sm);
 }
+
+.rea-toolbar__view-btn--active:hover,
+.rea-toolbar__view-btn[aria-pressed="true"]:hover {
+  color: var(--rea-text-on-accent);
+}
+
 
 .rea-toolbar__view-btn:focus-visible {
   outline: none;
