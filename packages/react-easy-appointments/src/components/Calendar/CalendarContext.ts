@@ -15,6 +15,8 @@ export type CalendarContextValue = {
   weekStartsOn: 0 | 1
   locale: string
   theme: 'light' | 'dark'
+  weekHourStart: number
+  weekHourEnd: number
 }
 
 export const CalendarContext = createContext<CalendarContextValue | null>(null)
@@ -23,4 +25,8 @@ export function useCalendarContext(): CalendarContextValue {
   const ctx = useContext(CalendarContext)
   if (!ctx) throw new Error('Calendar components must be used within <Calendar>')
   return ctx
+}
+
+export function useOptionalCalendarContext(): CalendarContextValue | null {
+  return useContext(CalendarContext)
 }

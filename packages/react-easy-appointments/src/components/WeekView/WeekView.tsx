@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { useCalendarContext } from '../Calendar/CalendarContext'
 import { TimeSlotBlock } from './TimeSlotBlock'
 
-const HOURS = Array.from({ length: 14 }, (_, i) => i + 7) // 7am–8pm
 const DAY_ABBR = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const ROW_HEIGHT_PX = 60 // must match --rea-week-row-height token
 
@@ -18,7 +17,8 @@ function getNowMinutes(): number {
 }
 
 export function WeekView() {
-  const { view, currentDate, slots, weekStartsOn, headless } = useCalendarContext()
+  const { view, currentDate, slots, weekStartsOn, headless, weekHourStart, weekHourEnd } = useCalendarContext()
+  const HOURS = Array.from({ length: weekHourEnd - weekHourStart }, (_, i) => i + weekHourStart)
   const [nowMinutes, setNowMinutes] = useState(getNowMinutes)
 
   useEffect(() => {

@@ -13,6 +13,8 @@ type CalendarProps = {
   weekStartsOn?: 0 | 1
   locale?: string
   theme?: CalendarTheme
+  weekHourStart?: number
+  weekHourEnd?: number
 }
 
 export function CalendarRoot({
@@ -25,6 +27,8 @@ export function CalendarRoot({
   weekStartsOn = 0,
   locale = 'en-US',
   theme = 'light',
+  weekHourStart = 7,
+  weekHourEnd = 20,
 }: CalendarProps) {
   const state = useCalendarState(defaultView)
 
@@ -62,7 +66,7 @@ export function CalendarRoot({
 
   return (
     <CalendarContext.Provider
-      value={{ slots, onSlotClick, onBook, headless, weekStartsOn, locale, theme: effectiveTheme, ...state }}
+      value={{ slots, onSlotClick, onBook, headless, weekStartsOn, locale, theme: effectiveTheme, weekHourStart, weekHourEnd, ...state }}
     >
       <div className={rootClass}>{children}</div>
     </CalendarContext.Provider>

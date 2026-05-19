@@ -6,18 +6,17 @@ import { useAppStore } from './store/appStore'
 import { useUserStore } from './store/userStore'
 import { useThemeStore } from './store/themeStore'
 import { UserSwitcher } from './components/UserSwitcher'
-import { AdminPanel } from './components/AdminPanel'
 import { DarkModeToggle } from './components/DarkModeToggle'
 
 export default function App() {
   const { activeUser } = useUserStore()
-  const { slots: storedSlots, appointments, bookSlot, cancelAppointment, createSlots } = useAppStore()
+  const { slots: storedSlots, appointments, bookSlot, cancelAppointment, createSlot, createSlots, removeSlot } = useAppStore()
   const { isDark } = useThemeStore()
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
-  const [quickCreateOpen, setQuickCreateOpen] = useState(false)
+  const [weekHourStart, setWeekHourStart] = useState(7)
+  const [weekHourEnd, setWeekHourEnd] = useState(20)
 
-  // Sync isDark to <html> class for Tailwind dark: utilities
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark)
   }, [isDark])
@@ -49,26 +48,28 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-white">
-
-      {/* ── Header — always dark ──────────────────────────────── */}
-      <header className="bg-[#0c1322] border-b border-white/[0.06] px-6 py-0 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          {/* Favicon logo mark */}
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" fill="none" viewBox="0 0 48 46" aria-hidden="true">
-            <path fill="#863bff" d="M25.946 44.938c-.664.845-2.021.375-2.021-.698V33.937a2.26 2.26 0 0 0-2.262-2.262H10.287c-.92 0-1.456-1.04-.92-1.788l7.48-10.471c1.07-1.497 0-3.578-1.842-3.578H1.237c-.92 0-1.456-1.04-.92-1.788L10.013.474c.214-.297.556-.474.92-.474h28.894c.92 0 1.456 1.04.92 1.788l-7.48 10.471c-1.07 1.498 0 3.579 1.842 3.579h11.377c.943 0 1.473 1.088.89 1.83L25.947 44.94z" />
-          </svg>
-          <span className="text-white text-[13px] font-medium" style={{ fontFamily: "ui-monospace, 'Cascadia Code', monospace" }}>
-            react-easy-appointments
-          </span>
-        </div>
+      <div className="fixed bottom-5 right-5 z-50 w-[160px] space-y-2">
         <DarkModeToggle />
-      </header>
-
-      <UserSwitcher />
+        <UserSwitcher />
+      </div>
 
       <main className="max-w-6xl mx-auto px-6 py-8 space-y-8">
+
+        {/* Admin Panel — standalone, full width, outside Calendar */}
         {activeUser.role === 'admin' && (
-          <AdminPanel onOpenQuickCreate={() => setQuickCreateOpen(true)} />
+          <Calendar.AdminPanel
+            slots={slots}
+            theme={isDark ? 'dark' : 'light'}
+            weekHourStart={weekHourStart}
+            weekHourEnd={weekHourEnd}
+            appointments={appointments}
+            onCreateSlot={createSlot}
+            onCreateSlots={createSlots}
+            onRemoveSlot={removeSlot}
+            onCancelAppointment={cancelAppointment}
+            onWeekHourStartChange={setWeekHourStart}
+            onWeekHourEndChange={setWeekHourEnd}
+          />
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -80,6 +81,8 @@ export default function App() {
               onBook={handleBook}
               defaultView="month"
               theme={isDark ? 'dark' : 'light'}
+              weekHourStart={weekHourStart}
+              weekHourEnd={weekHourEnd}
             >
               <Calendar.Toolbar />
               <Calendar.MonthView />
@@ -88,11 +91,6 @@ export default function App() {
                 slot={selectedSlot}
                 open={modalOpen}
                 onClose={() => { setModalOpen(false); setSelectedSlot(null) }}
-              />
-              <Calendar.QuickGenerateModal
-                open={quickCreateOpen}
-                onClose={() => setQuickCreateOpen(false)}
-                onGenerate={createSlots}
               />
             </Calendar>
           </div>
@@ -122,7 +120,6 @@ export default function App() {
                       key={appt.id}
                       className="group relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 border-l-[3px] border-l-green-500 p-[14px_16px] space-y-1"
                     >
-                      {/* Cancel on hover */}
                       <button
                         onClick={() => cancelAppointment(appt.id)}
                         aria-label="Cancel appointment"
@@ -149,6 +146,7 @@ export default function App() {
             )}
           </div>
         </div>
+
       </main>
     </div>
   )

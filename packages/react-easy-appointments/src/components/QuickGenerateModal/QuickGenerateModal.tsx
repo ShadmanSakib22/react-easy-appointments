@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCalendarContext } from '../Calendar/CalendarContext'
+import { useOptionalCalendarContext } from '../Calendar/CalendarContext'
 
 type Props = {
   open: boolean
@@ -27,7 +27,7 @@ export function QuickGenerateModal({
   defaultStartTime = '08:00',
   defaultEndTime = '18:00',
 }: Props) {
-  const { headless } = useCalendarContext()
+  const { headless = false } = useOptionalCalendarContext() ?? {}
 
   const [startDate, setStartDate] = useState(getFutureDateString(1))
   const [endDate, setEndDate] = useState(getFutureDateString(7))
@@ -79,7 +79,7 @@ export function QuickGenerateModal({
           )}
         </button>
 
-        <h2 className={headless ? undefined : 'rea-modal__title'}>⚡ Quick Generate Slots</h2>
+        <h2 className={headless ? undefined : 'rea-modal__title'}>Quick Generate Slots</h2>
 
         <form onSubmit={handleSubmit} className={headless ? undefined : 'rea-modal__form'}>
           {/* Date range */}
@@ -198,7 +198,7 @@ export function QuickGenerateModal({
 
           {/* Generate button */}
           <button type="submit" className={headless ? undefined : 'rea-modal__btn-generate'}>
-            ⚡ Generate Slots
+            Generate Slots
           </button>
           <div className={headless ? undefined : 'rea-modal__actions'}>
             <button

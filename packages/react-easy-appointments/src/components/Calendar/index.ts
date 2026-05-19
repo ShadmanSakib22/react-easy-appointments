@@ -4,6 +4,7 @@ import { MonthView } from '../MonthView/MonthView'
 import { WeekView } from '../WeekView/WeekView'
 import { BookingModal } from '../BookingModal/BookingModal'
 import { QuickGenerateModal } from '../QuickGenerateModal/QuickGenerateModal'
+import { AdminPanel } from '../AdminPanel/AdminPanel'
 
 export const Calendar = Object.assign(CalendarRoot, {
   Toolbar,
@@ -11,4 +12,5 @@ export const Calendar = Object.assign(CalendarRoot, {
   WeekView,
   BookingModal,
   QuickGenerateModal,
+  AdminPanel,
 })
