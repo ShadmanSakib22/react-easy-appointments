@@ -28,7 +28,7 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
   const confirmedAppts = appointments.filter(a => a.status === 'confirmed')
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 space-y-6">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">
           Admin Panel
@@ -39,7 +39,7 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
       <button
         type="button"
         onClick={onOpenQuickCreate}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-md shadow-indigo-900/20"
+        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold transition-colors shadow-md shadow-indigo-900/20"
       >
         ⚡ Quick Generate Slots
       </button>
@@ -63,7 +63,7 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
               value={date}
               onChange={e => setDate(e.target.value)}
               required
-              className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -73,7 +73,7 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
               value={startTime}
               onChange={e => setStartTime(e.target.value)}
               required
-              className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -83,12 +83,12 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
               value={endTime}
               onChange={e => setEndTime(e.target.value)}
               required
-              className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <button
             type="submit"
-            className="px-5 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm font-medium rounded-lg transition-colors"
+            className="px-5 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white text-sm font-medium transition-colors"
           >
             Add slot
           </button>
@@ -110,7 +110,7 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
           {slots.length === 0 ? (
             <p className="text-gray-400 dark:text-gray-500 text-sm">No slots yet.</p>
           ) : (
-            <div className="overflow-x-auto max-h-[260px] overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50/50 dark:bg-gray-900/30">
+            <div className="overflow-x-auto max-h-[260px] overflow-y-auto border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/30">
               <table className="w-full text-sm text-left">
                 <thead className="sticky top-0 bg-gray-100 dark:bg-gray-800">
                   <tr className="text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">
@@ -131,11 +131,11 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
                         <td className="py-2 px-3">{slot.endTime}</td>
                         <td className="py-2 px-3">
                           {slot.isBooked ? (
-                            <span className="inline-flex items-center gap-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded-full">
+                            <span className="inline-flex items-center gap-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-0.5">
                               Booked{slot.bookedByLabel ? ` · ${slot.bookedByLabel}` : ''}
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5 rounded-full">
+                            <span className="inline-flex items-center gap-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-0.5">
                               Available
                             </span>
                           )}
@@ -174,7 +174,7 @@ export function AdminPanel({ onOpenQuickCreate }: Props) {
           {confirmedAppts.length === 0 ? (
             <p className="text-gray-400 dark:text-gray-500 text-sm">No active appointments.</p>
           ) : (
-            <div className="overflow-x-auto border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50/50 dark:bg-gray-900/30">
+            <div className="overflow-x-auto border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/30">
               <table className="w-full text-sm text-left">
                 <thead className="sticky top-0 bg-gray-100 dark:bg-gray-800">
                   <tr className="text-gray-500 dark:text-gray-400 border-b border-gray-200 dark:border-gray-700">

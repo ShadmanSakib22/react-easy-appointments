@@ -1,43 +1,100 @@
 /*
   react-easy-appointments — CSS Variable Reference
-  ================================================
-  Override any of these on .rea-calendar in your own stylesheet:
+  =================================================
+  Override any variable on .rea-calendar in your own stylesheet.
+
+  Two built-in themes are provided:
+    Light (default) — no class needed
+    Dark            — add class "rea-dark" to <Calendar theme="dark" />
+                      or set data-theme="dark" on any ancestor element
+
+  Example — custom brand accent:
 
     .rea-calendar {
-      --rea-color-available: hotpink;
+      --rea-btn-primary-bg:        #7c3aed;
+      --rea-btn-primary-bg-hover:  #6d28d9;
+      --rea-slot-booked-bg:        #7c3aed;
+      --rea-today-indicator:       #7c3aed;
+      --rea-border-focus:          #7c3aed;
+      --rea-shadow-focus:          0 0 0 3px rgba(124, 58, 237, 0.25);
     }
 
-  ── Colors ──────────────────────────────────────────────
-  --rea-color-available        Available slot background     #22c55e
-  --rea-color-available-hover  Available slot hover          #16a34a
-  --rea-color-booked           Booked-by-you slot / accents  #3b82f6
-  --rea-color-booked-hover     Booked slot hover             #2563eb
-  --rea-color-unavailable      Taken-by-other slot           #d1d5db
-  --rea-color-text             Primary text                  #111827
-  --rea-color-text-muted       Secondary / label text        #6b7280
-  --rea-color-bg               Cell / modal background       #ffffff
-  --rea-color-border           Grid lines and borders        #e5e7eb
-  --rea-color-today            Today cell highlight          #eff6ff
-  --rea-color-outside          Out-of-month cell bg          #f9fafb
-  --rea-color-modal-backdrop   Modal overlay                 rgba(0,0,0,0.5)
-  --rea-color-modal-bg         Modal card background         #ffffff
+  ── Surfaces ────────────────────────────────────────────────
+  --rea-bg-base             Root / cell background             #ffffff
+  --rea-bg-elevated         Cards, modals                      #ffffff
+  --rea-bg-subtle           Outside-month cells, headers       #f8f9fb
+  --rea-bg-wash             Today cell highlight               #eef4ff
+  --rea-bg-overlay          Modal backdrop                     rgba(15,23,42,0.45)
 
-  ── Typography ──────────────────────────────────────────
-  --rea-font-family            Inherits from parent          inherit
-  --rea-font-size-base         Body text                     14px
-  --rea-font-size-sm           Labels, slot text             12px
+  ── Borders ─────────────────────────────────────────────────
+  --rea-border-default      Grid lines, input borders          #e2e6ed
+  --rea-border-focus        Focus ring color                   #3b6ff5
 
-  ── Shape ───────────────────────────────────────────────
-  --rea-radius-sm              Slot buttons                  4px
-  --rea-radius-md              Calendar card                 8px
-  --rea-radius-lg              Modal card                    12px
-  --rea-radius-btn             Toolbar buttons               6px
-  --rea-shadow-modal           Modal drop shadow             0 20px 60px rgba(0,0,0,0.15)
+  ── Text ────────────────────────────────────────────────────
+  --rea-text-primary        Primary content                    #0f172a
+  --rea-text-secondary      Labels, muted content              #64748b
+  --rea-text-disabled       Outside cells, placeholders        #b0b8c4
+  --rea-text-on-accent      Text on colored backgrounds        #ffffff
 
-  ── Layout ──────────────────────────────────────────────
-  --rea-cell-min-height        Month cell minimum height     80px
-  --rea-cell-padding           Month cell inner padding      8px
-  --rea-toolbar-height         Toolbar bar height            48px
-  --rea-time-gutter-width      Week view time label column   60px
-  --rea-week-row-height        Week view hourly row height   56px
+  ── Slot states ─────────────────────────────────────────────
+  --rea-slot-available-bg         Available slot fill          #16a34a
+  --rea-slot-available-bg-hover   Available slot hover         #15803d
+  --rea-slot-available-text       Available slot text          #ffffff
+  --rea-slot-booked-bg            Booked slot fill             #3b6ff5
+  --rea-slot-booked-text          Booked slot text             #ffffff
+  --rea-slot-unavailable-bg       Unavailable slot fill        #e9ecf0
+  --rea-slot-unavailable-text     Unavailable slot text        #94a3b8
+
+  ── Buttons ─────────────────────────────────────────────────
+  --rea-btn-primary-bg        Primary button fill              #3b6ff5
+  --rea-btn-primary-bg-hover  Primary button hover             #2d5ce8
+  --rea-btn-primary-text      Primary button text              #ffffff
+  --rea-btn-ghost-border      Ghost button border              #e2e6ed
+  --rea-btn-ghost-bg-hover    Ghost button hover fill          #f1f5f9
+
+  ── Accents ─────────────────────────────────────────────────
+  --rea-today-indicator     Today date circle + column tint    #3b6ff5
+
+  ── Motion ──────────────────────────────────────────────────
+  --rea-duration-fast       Quick transitions                  100ms
+  --rea-duration-base       Standard transitions               160ms
+  --rea-ease-out            Spring easing                      cubic-bezier(0.16,1,0.3,1)
+
+  ── Shadows ─────────────────────────────────────────────────
+  --rea-shadow-sm           Hover lift, segmented control      0 1px 3px …
+  --rea-shadow-modal        Modal card elevation               0 24px 64px …
+  --rea-shadow-focus        Focus ring spread                  0 0 0 3px …
+
+  ── Shape ───────────────────────────────────────────────────
+  --rea-radius-sm           Slot pills                         3px
+  --rea-radius-md           Inputs, buttons, day pills         6px
+  --rea-radius-lg           Calendar card, modals              10px
+  --rea-radius-btn          Toolbar buttons                    6px
+  --rea-radius-pill         Circular badges                    999px
+
+  ── Layout ──────────────────────────────────────────────────
+  --rea-cell-min-height     Month cell minimum height          88px
+  --rea-cell-padding        Month cell inner padding           6px
+  --rea-toolbar-height      Toolbar bar height                 52px
+  --rea-time-gutter-width   Week view time label column        56px
+  --rea-week-row-height     Week view hourly row height        60px
+
+  ── Typography ──────────────────────────────────────────────
+  --rea-font-family         Always "inherit" — uses host font  inherit
+  --rea-font-size-base      Body / input text                  13px
+  --rea-font-size-sm        Labels, muted text                 11px
+  --rea-font-size-xs        Slot pills, time labels            10px
+
+  ── Backward-compat aliases (deprecated, removed in v0.3) ───
+  --rea-color-available     → --rea-slot-available-bg
+  --rea-color-booked        → --rea-slot-booked-bg
+  --rea-color-unavailable   → --rea-slot-unavailable-bg
+  --rea-color-text          → --rea-text-primary
+  --rea-color-text-muted    → --rea-text-secondary
+  --rea-color-bg            → --rea-bg-base
+  --rea-color-border        → --rea-border-default
+  --rea-color-today         → --rea-bg-wash
+  --rea-color-outside       → --rea-bg-subtle
+  --rea-color-modal-backdrop → --rea-bg-overlay
+  --rea-color-modal-bg      → --rea-bg-elevated
 */

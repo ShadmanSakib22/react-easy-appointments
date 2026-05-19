@@ -4,8 +4,8 @@ export function UserSwitcher() {
   const { users, activeUser, setActiveUser } = useUserStore()
 
   return (
-    <div className="flex items-center bg-[#111827] border-b border-[#1f2937]">
-      <div className="flex items-center px-6 gap-0">
+    <div className="flex items-center bg-[#111827] border-b border-[#1f2937] overflow-x-auto">
+      <div className="flex items-center px-4 sm:px-6 gap-0 min-w-max">
         <span className="text-gray-500 text-xs font-medium uppercase tracking-wider py-3 mr-4 shrink-0">
           User
         </span>

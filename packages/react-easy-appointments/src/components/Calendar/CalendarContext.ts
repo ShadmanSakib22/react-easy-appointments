@@ -14,6 +14,7 @@ export type CalendarContextValue = {
   headless: boolean
   weekStartsOn: 0 | 1
   locale: string
+  theme: 'light' | 'dark'
 }
 
 export const CalendarContext = createContext<CalendarContextValue | null>(null)

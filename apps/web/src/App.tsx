@@ -120,7 +120,7 @@ export default function App() {
                   return (
                     <li
                       key={appt.id}
-                      className="group relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 border-l-[3px] border-l-green-500 rounded-xl p-[14px_16px] space-y-1"
+                      className="group relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 border-l-[3px] border-l-green-500 p-[14px_16px] space-y-1"
                     >
                       {/* Cancel on hover */}
                       <button
@@ -136,7 +136,7 @@ export default function App() {
                           {slot.date} · {slot.startTime}–{slot.endTime}
                         </p>
                       )}
-                      <span className="inline-block text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded-full">
+                      <span className="inline-block text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5">
                         {appt.durationMinutes}min
                       </span>
                       {appt.notes && (

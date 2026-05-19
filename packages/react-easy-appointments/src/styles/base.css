@@ -52,11 +52,11 @@
   --rea-shadow-focus: 0 0 0 3px rgba(59, 111, 245, 0.22);
 
   /* Shape */
-  --rea-radius-sm: 3px;
-  --rea-radius-md: 6px;
-  --rea-radius-lg: 10px;
-  --rea-radius-btn: 6px;
-  --rea-radius-pill: 999px;
+  --rea-radius-sm: 0px;
+  --rea-radius-md: 0px;
+  --rea-radius-lg: 0px;
+  --rea-radius-btn: 0px;
+  --rea-radius-pill: 0px;
 
   /* Layout */
   --rea-cell-min-height: 88px;
@@ -215,8 +215,8 @@
 
 /* SVG chevron icons */
 .rea-toolbar__btn--nav svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
@@ -413,12 +413,15 @@
   background: var(--rea-bg-base);
 }
 
-/* Header row */
+/* Header row — sticky inside scroll wrapper so it stays visible while scrolling */
 .rea-week-view__header {
   display: grid;
   grid-template-columns: var(--rea-time-gutter-width) repeat(7, 1fr);
   background: var(--rea-bg-subtle);
   border-bottom: 1px solid var(--rea-border-default);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .rea-week-view__time-gutter-header {
@@ -462,10 +465,14 @@
   color: var(--rea-text-on-accent);
 }
 
-/* Scrollable grid */
-.rea-week-view__grid {
+/* Scroll wrapper — contains both sticky header + grid so scrollbar width is shared */
+.rea-week-view__scroll {
   overflow-y: auto;
   max-height: 600px;
+}
+
+/* Grid — no overflow of its own; scroll container handles it */
+.rea-week-view__grid {
 }
 
 /* Hour row */
@@ -744,8 +751,8 @@
 }
 
 .rea-modal__close svg {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
@@ -1036,6 +1043,25 @@
 .rea-modal__duration-btn:focus-visible {
   outline: none;
   box-shadow: var(--rea-shadow-focus);
+}
+
+/* Custom duration row: number input + "min" label */
+.rea-modal__duration-custom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.rea-modal__input--custom-duration {
+  width: 72px !important;
+  text-align: center;
+}
+
+.rea-modal__duration-unit {
+  font-size: var(--rea-font-size-sm);
+  color: var(--rea-text-secondary);
+  font-weight: 500;
 }
 
 /* Generate / primary-full button */

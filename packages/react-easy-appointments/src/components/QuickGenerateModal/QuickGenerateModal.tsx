@@ -44,6 +44,11 @@ export function QuickGenerateModal({
     )
   }
 
+  function handleDurationInput(val: string) {
+    const n = parseInt(val, 10)
+    if (!isNaN(n) && n > 0) setDuration(n)
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (!startDate || !endDate || !startTime || !endTime || selectedDays.length === 0) return
@@ -60,7 +65,7 @@ export function QuickGenerateModal({
       aria-label="Quick generate slots"
     >
       <div className={headless ? undefined : 'rea-modal'}>
-        {/* Close button — SVG × */}
+        {/* Close button */}
         <button
           type="button"
           onClick={onClose}
@@ -77,7 +82,7 @@ export function QuickGenerateModal({
         <h2 className={headless ? undefined : 'rea-modal__title'}>⚡ Quick Generate Slots</h2>
 
         <form onSubmit={handleSubmit} className={headless ? undefined : 'rea-modal__form'}>
-          {/* Date range — 2-col grid */}
+          {/* Date range */}
           <div className={headless ? undefined : 'rea-modal__grid-2'}>
             <label className={headless ? undefined : 'rea-modal__label'}>
               Start Date
@@ -150,33 +155,48 @@ export function QuickGenerateModal({
             </label>
           </div>
 
-          {/* Duration — segmented control */}
+          {/* Duration — segmented presets + custom number input */}
           <div className={headless ? undefined : 'rea-modal__label'}>
             Slot Duration
             {headless ? (
-              <select value={duration} onChange={e => setDuration(Number(e.target.value))}>
-                {DURATIONS.map(({ label, value }) => (
-                  <option key={value} value={value}>{label}</option>
-                ))}
-              </select>
+              <input
+                type="number"
+                min={1}
+                value={duration}
+                onChange={e => handleDurationInput(e.target.value)}
+              />
             ) : (
-              <div className="rea-modal__duration-track" role="group" aria-label="Slot duration">
-                {DURATIONS.map(({ label, value }) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setDuration(value)}
-                    aria-pressed={duration === value}
-                    className={`rea-modal__duration-btn${duration === value ? ' rea-modal__duration-btn--active' : ''}`}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
+              <>
+                <div className="rea-modal__duration-track" role="group" aria-label="Slot duration presets">
+                  {DURATIONS.map(({ label, value }) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setDuration(value)}
+                      aria-pressed={duration === value}
+                      className={`rea-modal__duration-btn${duration === value ? ' rea-modal__duration-btn--active' : ''}`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <div className="rea-modal__duration-custom">
+                  <input
+                    type="number"
+                    min={1}
+                    max={480}
+                    value={duration}
+                    onChange={e => handleDurationInput(e.target.value)}
+                    aria-label="Custom duration in minutes"
+                    className="rea-modal__input rea-modal__input--custom-duration"
+                  />
+                  <span className="rea-modal__duration-unit">min</span>
+                </div>
+              </>
             )}
           </div>
 
-          {/* Actions */}
+          {/* Generate button */}
           <button type="submit" className={headless ? undefined : 'rea-modal__btn-generate'}>
             ⚡ Generate Slots
           </button>

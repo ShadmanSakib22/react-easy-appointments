@@ -16,3 +16,5 @@ export type BookingFormData = {
 }
 
 export type CalendarView = 'month' | 'week'
+
+export type CalendarTheme = 'light' | 'dark' | 'auto'

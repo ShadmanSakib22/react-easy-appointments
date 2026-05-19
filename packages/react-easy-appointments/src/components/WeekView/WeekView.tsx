@@ -72,7 +72,9 @@ export function WeekView() {
 
   return (
     <div className="rea-week-view">
-      {/* Header */}
+      {/* Scroll wrapper — header + grid share the same scrollbar so columns align */}
+      <div className="rea-week-view__scroll">
+      {/* Header — sticky inside scroll wrapper */}
       <div className="rea-week-view__header">
         <div className="rea-week-view__time-gutter-header" />
         {days.map(day => {
@@ -137,6 +139,7 @@ export function WeekView() {
           )
         })}
       </div>
+      </div>{/* end .rea-week-view__scroll */}
     </div>
   )
 }
