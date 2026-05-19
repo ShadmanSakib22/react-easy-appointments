@@ -124,3 +124,8 @@ export const useAppStore = create<AppStore>()(
     { name: 'rea-demo' },
   ),
 )
+
+// Force persistence of the initial seeded state on first run
+if (typeof window !== 'undefined' && !localStorage.getItem('rea-demo')) {
+  useAppStore.setState({ slots: useAppStore.getState().slots })
+}
