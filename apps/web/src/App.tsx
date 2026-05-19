@@ -72,9 +72,9 @@ export default function App() {
           />
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Calendar */}
-          <div className="lg:col-span-2">
+        {/* Calendar */}
+        <div className="w-full overflow-x-auto">
+          <div className="min-w-[545px]">
             <Calendar
               slots={slots}
               onSlotClick={handleSlotClick}
@@ -94,57 +94,57 @@ export default function App() {
               />
             </Calendar>
           </div>
+        </div>
 
-          {/* My Appointments sidebar */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider px-1">
-              My Appointments
-            </h2>
+        {/* My Appointments sidebar */}
+        <div className="space-y-3">
+          <h2 className="text-xs font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider px-1">
+            My Appointments
+          </h2>
 
-            {myAppointments.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-10 gap-3 text-gray-500 dark:text-gray-400">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                  <line x1="16" y1="2" x2="16" y2="6" />
-                  <line x1="8" y1="2" x2="8" y2="6" />
-                  <line x1="3" y1="10" x2="21" y2="10" />
-                </svg>
-                <p className="text-sm">No appointments yet</p>
-              </div>
-            ) : (
-              <ul className="space-y-2">
-                {myAppointments.map(appt => {
-                  const slot = storedSlots.find(s => s.id === appt.slotId)
-                  return (
-                    <li
-                      key={appt.id}
-                      className="group relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 border-l-[3px] border-l-green-700 p-[14px_16px] space-y-1"
+          {myAppointments.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-10 gap-3 text-gray-500 dark:text-gray-400">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                <line x1="16" y1="2" x2="16" y2="6" />
+                <line x1="8" y1="2" x2="8" y2="6" />
+                <line x1="3" y1="10" x2="21" y2="10" />
+              </svg>
+              <p className="text-sm">No appointments yet</p>
+            </div>
+          ) : (
+            <ul className="space-y-2">
+              {myAppointments.map(appt => {
+                const slot = storedSlots.find(s => s.id === appt.slotId)
+                return (
+                  <li
+                    key={appt.id}
+                    className="group relative bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 border-l-[3px] border-l-green-700 p-[14px_16px] space-y-1"
+                  >
+                    <button
+                      onClick={() => cancelAppointment(appt.id)}
+                      aria-label="Cancel appointment"
+                      className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-lg leading-none font-bold"
                     >
-                      <button
-                        onClick={() => cancelAppointment(appt.id)}
-                        aria-label="Cancel appointment"
-                        className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-lg leading-none font-bold"
-                      >
-                        ×
-                      </button>
-                      <p className="font-semibold text-sm text-gray-900 dark:text-white pr-5">{appt.subject}</p>
-                      {slot && (
-                        <p className="text-xs text-gray-600 dark:text-gray-300">
-                          {slot.date} · {slot.startTime}–{slot.endTime}
-                        </p>
-                      )}
-                      <span className="inline-block text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5">
-                        {appt.durationMinutes}min
-                      </span>
-                      {appt.notes && (
-                        <p className="text-xs text-gray-600 dark:text-gray-400 italic">{appt.notes}</p>
-                      )}
-                    </li>
-                  )
-                })}
-              </ul>
-            )}
-          </div>
+                      ×
+                    </button>
+                    <p className="font-semibold text-sm text-gray-900 dark:text-white pr-5">{appt.subject}</p>
+                    {slot && (
+                      <p className="text-xs text-gray-600 dark:text-gray-300">
+                        {slot.date} · {slot.startTime}–{slot.endTime}
+                      </p>
+                    )}
+                    <span className="inline-block text-[10px] font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5">
+                      {appt.durationMinutes}min
+                    </span>
+                    {appt.notes && (
+                      <p className="text-xs text-gray-600 dark:text-gray-400 italic">{appt.notes}</p>
+                    )}
+                  </li>
+                )
+              })}
+            </ul>
+          )}
         </div>
 
       </main>
