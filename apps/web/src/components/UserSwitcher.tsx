@@ -4,25 +4,29 @@ export function UserSwitcher() {
   const { users, activeUser, setActiveUser } = useUserStore()
 
   return (
-    <div className="flex items-center gap-3 px-6 py-3 bg-gray-900 border-b border-gray-700">
-      <span className="text-gray-400 text-sm font-medium mr-2">Active user:</span>
-      {users.map(user => (
-        <button
-          key={user.id}
-          onClick={() => setActiveUser(user.id)}
-          className={[
-            'px-4 py-1.5 rounded-full text-sm font-medium transition-colors',
-            activeUser.id === user.id
-              ? 'bg-indigo-600 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600',
-          ].join(' ')}
-        >
-          {user.label}
-          {user.role === 'admin' && (
-            <span className="ml-1.5 text-xs opacity-70">(admin)</span>
-          )}
-        </button>
-      ))}
+    <div className="flex items-center bg-[#111827] border-b border-[#1f2937]">
+      <div className="flex items-center px-6 gap-0">
+        <span className="text-gray-500 text-xs font-medium uppercase tracking-wider py-3 mr-4 shrink-0">
+          User
+        </span>
+        {users.map(user => (
+          <button
+            key={user.id}
+            onClick={() => setActiveUser(user.id)}
+            className={[
+              'relative px-4 py-3 text-sm font-medium transition-colors border-b-2 -mb-px whitespace-nowrap',
+              activeUser.id === user.id
+                ? 'text-white border-indigo-500'
+                : 'text-gray-400 border-transparent hover:text-gray-200 hover:border-gray-600',
+            ].join(' ')}
+          >
+            {user.label}
+            {user.role === 'admin' && (
+              <span className="ml-1.5 text-gray-500 text-xs">⚙</span>
+            )}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
