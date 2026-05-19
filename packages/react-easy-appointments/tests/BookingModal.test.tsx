@@ -16,11 +16,10 @@ function renderModal({
   open = true,
   onClose = vi.fn(),
   onBook = vi.fn(),
-  durations = [30, 60, 90],
 } = {}) {
   return render(
     <Calendar slots={[]} onBook={onBook}>
-      <Calendar.BookingModal slot={slot} open={open} onClose={onClose} durations={durations} />
+      <Calendar.BookingModal slot={slot} open={open} onClose={onClose} />
     </Calendar>
   )
 }
@@ -29,7 +28,7 @@ describe('BookingModal', () => {
   it('renders nothing when open=false', () => {
     const { container } = render(
       <Calendar slots={[]}>
-        <Calendar.BookingModal slot={slot} open={false} onClose={() => {}} durations={[30]} />
+        <Calendar.BookingModal slot={slot} open={false} onClose={() => {}} />
       </Calendar>
     )
     expect(container.querySelector('[role="dialog"]')).toBeNull()
@@ -40,20 +39,12 @@ describe('BookingModal', () => {
     expect(screen.getByRole('dialog')).toBeInTheDocument()
   })
 
-  it('renders all duration buttons with correct labels', () => {
-    renderModal({ durations: [30, 60, 90] })
-    expect(screen.getByRole('button', { name: /30min/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /1hr/i })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /1h 30m/i })).toBeInTheDocument()
-  })
-
   it('submits correct BookingFormData via onBook', async () => {
     const onBook = vi.fn()
     renderModal({ onBook })
     await userEvent.type(screen.getByPlaceholderText(/appointment subject/i), 'Checkup')
     await userEvent.type(screen.getByPlaceholderText(/optional notes/i), 'Annual visit')
-    await userEvent.click(screen.getByRole('button', { name: /1hr/i }))
-    await userEvent.click(screen.getByRole('button', { name: /confirm booking/i }))
+    await userEvent.click(screen.getByRole('button', { name: /confirm/i }))
     expect(onBook).toHaveBeenCalledWith(slot, {
       subject: 'Checkup',
       notes: 'Annual visit',
@@ -72,7 +63,7 @@ describe('BookingModal', () => {
     const onClose = vi.fn()
     renderModal({ onClose })
     await userEvent.type(screen.getByPlaceholderText(/appointment subject/i), 'Test')
-    await userEvent.click(screen.getByRole('button', { name: /confirm booking/i }))
+    await userEvent.click(screen.getByRole('button', { name: /confirm/i }))
     expect(onClose).toHaveBeenCalled()
   })
 })
