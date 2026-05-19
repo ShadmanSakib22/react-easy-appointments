@@ -130,7 +130,6 @@ You can add `Calendar.AdminPanel` to manage appointment availability, generate s
 | `slot` | `Slot \| null` | **Required** | The target slot to book |
 | `open` | `boolean` | **Required** | Shows/hides the modal dialog |
 | `onClose` | `() => void` | **Required** | Callback when clicking the close button or backdrop |
-| `durations` | `number[]` | `[30, 60, 90]` | Duration selector options in minutes |
 
 ---
 
