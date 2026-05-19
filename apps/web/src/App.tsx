@@ -9,9 +9,10 @@ import { AdminPanel } from './components/AdminPanel'
 
 export default function App() {
   const { activeUser } = useUserStore()
-  const { slots: storedSlots, appointments, bookSlot, cancelAppointment } = useAppStore()
+  const { slots: storedSlots, appointments, bookSlot, cancelAppointment, createSlots } = useAppStore()
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const [quickCreateOpen, setQuickCreateOpen] = useState(false)
 
   const slots: Slot[] = storedSlots.map(s => ({
     id: s.id,
@@ -47,7 +48,9 @@ export default function App() {
       <UserSwitcher />
 
       <main className="max-w-6xl mx-auto px-6 py-8 space-y-8">
-        {activeUser.role === 'admin' && <AdminPanel />}
+        {activeUser.role === 'admin' && (
+          <AdminPanel onOpenQuickCreate={() => setQuickCreateOpen(true)} />
+        )}
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
@@ -64,6 +67,11 @@ export default function App() {
                 slot={selectedSlot}
                 open={modalOpen}
                 onClose={() => { setModalOpen(false); setSelectedSlot(null) }}
+              />
+              <Calendar.QuickGenerateModal
+                open={quickCreateOpen}
+                onClose={() => setQuickCreateOpen(false)}
+                onGenerate={createSlots}
               />
             </Calendar>
           </div>

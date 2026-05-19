@@ -231,6 +231,51 @@
 }
 .rea-modal__btn-confirm:hover { background: var(--rea-color-booked-hover); }
 
+/* ── Quick Generate Modal ────────────────────────────── */
+.rea-modal__grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.rea-modal__days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  margin-top: 4px;
+}
+.rea-modal__day-btn {
+  padding: 6px 4px;
+  border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-btn);
+  background: none;
+  cursor: pointer;
+  font-size: var(--rea-font-size-sm);
+  text-align: center;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+}
+.rea-modal__day-btn:hover {
+  background: var(--rea-color-border);
+}
+.rea-modal__day-btn--active {
+  background: var(--rea-color-booked) !important;
+  color: #fff !important;
+  border-color: var(--rea-color-booked) !important;
+}
+.rea-modal__select {
+  padding: 8px 10px;
+  border: 1px solid var(--rea-color-border);
+  border-radius: var(--rea-radius-sm);
+  font-size: var(--rea-font-size-base);
+  font-family: inherit;
+  outline: none;
+  background: var(--rea-color-bg);
+  cursor: pointer;
+}
+.rea-modal__select:focus {
+  border-color: var(--rea-color-booked);
+}
+
 /* ── Duration Picker ─────────────────────────────────── */
 .rea-duration-picker { display: flex; flex-direction: column; gap: 4px; }
 .rea-duration-picker__options { display: flex; gap: 8px; flex-wrap: wrap; }

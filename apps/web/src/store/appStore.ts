@@ -26,6 +26,7 @@ type AppStore = {
   slots: StoredSlot[]
   appointments: StoredAppointment[]
   createSlot: (date: string, startTime: string, endTime: string) => void
+  createSlots: (newSlots: { date: string; startTime: string; endTime: string }[]) => void
   removeSlot: (id: string) => void
   bookSlot: (
     slotId: string,
@@ -75,6 +76,26 @@ export const useAppStore = create<AppStore>()(
             { id: crypto.randomUUID(), date, startTime, endTime, isBooked: false },
           ],
         })),
+
+      createSlots: (newSlots) =>
+        set(s => {
+          const currentSlots = s.slots
+          const slotsToAdd = newSlots
+            .filter(
+              n =>
+                !currentSlots.some(
+                  c => c.date === n.date && c.startTime === n.startTime && c.endTime === n.endTime
+                )
+            )
+            .map(n => ({
+              id: crypto.randomUUID(),
+              date: n.date,
+              startTime: n.startTime,
+              endTime: n.endTime,
+              isBooked: false,
+            }))
+          return { slots: [...s.slots, ...slotsToAdd] }
+        }),
 
       removeSlot: (id) =>
         set(s => ({

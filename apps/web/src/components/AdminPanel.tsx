@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { useAppStore } from '../store/appStore'
 
-export function AdminPanel() {
+type Props = {
+  onOpenQuickCreate: () => void
+}
+
+export function AdminPanel({ onOpenQuickCreate }: Props) {
   const [date, setDate] = useState('')
   const [startTime, setStartTime] = useState('')
   const [endTime, setEndTime] = useState('')
@@ -20,14 +24,23 @@ export function AdminPanel() {
   const confirmedAppts = appointments.filter(a => a.status === 'confirmed')
 
   return (
-    <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-8">
+    <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 space-y-8 relative">
       <h2 className="text-lg font-semibold text-white">Admin Panel</h2>
 
       {/* Slot creation */}
       <section>
-        <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">
-          Create Slot
-        </h3>
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wider">
+            Create Slot
+          </h3>
+          <button
+            type="button"
+            onClick={onOpenQuickCreate}
+            className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-xs font-semibold text-white rounded-lg transition-colors flex items-center gap-1.5 shadow-md shadow-indigo-900/30"
+          >
+            ⚡ Quick Generate Slots
+          </button>
+        </div>
         <form onSubmit={handleCreateSlot} className="flex flex-wrap gap-3 items-end">
           <div className="flex flex-col gap-1">
             <label className="text-xs text-gray-400">Date</label>
@@ -61,7 +74,7 @@ export function AdminPanel() {
           </div>
           <button
             type="submit"
-            className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors"
+            className="px-5 py-2 bg-gray-700 hover:bg-gray-600 border border-gray-600 text-white text-sm font-medium rounded-lg transition-colors"
           >
             Add slot
           </button>
@@ -76,9 +89,9 @@ export function AdminPanel() {
         {slots.length === 0 ? (
           <p className="text-gray-500 text-sm">No slots yet.</p>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto max-h-[300px] overflow-y-auto border border-gray-700 rounded-lg p-2 bg-gray-900/30">
             <table className="w-full text-sm text-left">
-              <thead>
+              <thead className="sticky top-0 bg-gray-800">
                 <tr className="text-gray-400 border-b border-gray-700">
                   <th className="pb-2 pr-4 font-medium">Date</th>
                   <th className="pb-2 pr-4 font-medium">Start</th>
@@ -87,8 +100,8 @@ export function AdminPanel() {
                   <th className="pb-2 font-medium">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-700">
-                {slots.map(slot => (
+              <tbody className="divide-y divide-gray-750">
+                {[...slots].sort((a, b) => a.date.localeCompare(b.date) || a.startTime.localeCompare(b.startTime)).map(slot => (
                   <tr key={slot.id} className="text-gray-300">
                     <td className="py-2 pr-4">{slot.date}</td>
                     <td className="py-2 pr-4">{slot.startTime}</td>
