@@ -138,6 +138,9 @@
   background: var(--rea-bg-base);
   box-sizing: border-box;
   line-height: 1.4;
+  border: 1px solid var(--rea-border-default);
+  border-radius: var(--rea-radius-lg);
+  overflow: hidden;
 }
 
 .rea-calendar *,
