@@ -8,38 +8,38 @@
   /* Surfaces */
   --rea-bg-base: #ffffff;
   --rea-bg-elevated: #ffffff;
-  --rea-bg-subtle: #f8f9fb;
-  --rea-bg-wash: #eef4ff;
+  --rea-bg-subtle: #f8f9fa;
+  --rea-bg-wash: #eff6ff;
   --rea-bg-overlay: rgba(15, 23, 42, 0.45);
 
   /* Borders */
-  --rea-border-default: #e2e6ed;
-  --rea-border-focus: #3b6ff5;
+  --rea-border-default: #cbd5e1;
+  --rea-border-focus: #1d4ed8;
 
   /* Text */
   --rea-text-primary: #0f172a;
-  --rea-text-secondary: #64748b;
-  --rea-text-disabled: #b0b8c4;
+  --rea-text-secondary: #475569;
+  --rea-text-disabled: #64748b;
   --rea-text-on-accent: #ffffff;
 
   /* Slot states */
-  --rea-slot-available-bg: #16a34a;
-  --rea-slot-available-bg-hover: #15803d;
+  --rea-slot-available-bg: #15803d;
+  --rea-slot-available-bg-hover: #166534;
   --rea-slot-available-text: #ffffff;
-  --rea-slot-booked-bg: #3b6ff5;
+  --rea-slot-booked-bg: #1d4ed8;
   --rea-slot-booked-text: #ffffff;
-  --rea-slot-unavailable-bg: #e9ecf0;
-  --rea-slot-unavailable-text: #94a3b8;
+  --rea-slot-unavailable-bg: #f1f5f9;
+  --rea-slot-unavailable-text: #475569;
 
   /* Buttons */
-  --rea-btn-primary-bg: #3b6ff5;
-  --rea-btn-primary-bg-hover: #2d5ce8;
+  --rea-btn-primary-bg: #1d4ed8;
+  --rea-btn-primary-bg-hover: #1e40af;
   --rea-btn-primary-text: #ffffff;
-  --rea-btn-ghost-border: #e2e6ed;
+  --rea-btn-ghost-border: #cbd5e1;
   --rea-btn-ghost-bg-hover: #f1f5f9;
 
   /* Today accent */
-  --rea-today-indicator: #3b6ff5;
+  --rea-today-indicator: #1d4ed8;
 
   /* Motion */
   --rea-duration-fast: 100ms;
@@ -95,33 +95,33 @@
 [data-theme="dark"] .rea-calendar {
   --rea-bg-base: #0f172a;
   --rea-bg-elevated: #1e293b;
-  --rea-bg-subtle: #162032;
-  --rea-bg-wash: #1a2744;
+  --rea-bg-subtle: #1e293b;
+  --rea-bg-wash: #1e1b4b;
   --rea-bg-overlay: rgba(0, 0, 0, 0.6);
 
-  --rea-border-default: #2a3a52;
-  --rea-border-focus: #6b9aff;
+  --rea-border-default: #475569;
+  --rea-border-focus: #60a5fa;
 
-  --rea-text-primary: #f1f5f9;
-  --rea-text-secondary: #94a3b8;
-  --rea-text-disabled: #3f5068;
+  --rea-text-primary: #f8fafc;
+  --rea-text-secondary: #cbd5e1;
+  --rea-text-disabled: #64748b;
   --rea-text-on-accent: #ffffff;
 
-  --rea-slot-available-bg: #16803d;
-  --rea-slot-available-bg-hover: #15a050;
+  --rea-slot-available-bg: #166534;
+  --rea-slot-available-bg-hover: #15803d;
   --rea-slot-available-text: #ffffff;
-  --rea-slot-booked-bg: #2d5ce8;
+  --rea-slot-booked-bg: #2563eb;
   --rea-slot-booked-text: #ffffff;
-  --rea-slot-unavailable-bg: #1a2640;
-  --rea-slot-unavailable-text: #475569;
+  --rea-slot-unavailable-bg: #334155;
+  --rea-slot-unavailable-text: #cbd5e1;
 
-  --rea-btn-primary-bg: #3b6ff5;
-  --rea-btn-primary-bg-hover: #5a8aff;
+  --rea-btn-primary-bg: #2563eb;
+  --rea-btn-primary-bg-hover: #3b82f6;
   --rea-btn-primary-text: #ffffff;
-  --rea-btn-ghost-border: #2a3a52;
+  --rea-btn-ghost-border: #475569;
   --rea-btn-ghost-bg-hover: #1e293b;
 
-  --rea-today-indicator: #6b9aff;
+  --rea-today-indicator: #60a5fa;
 
   --rea-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
   --rea-shadow-modal: 0 24px 64px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);

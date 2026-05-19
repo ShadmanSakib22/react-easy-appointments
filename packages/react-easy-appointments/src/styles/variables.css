@@ -22,38 +22,38 @@
   ── Surfaces ────────────────────────────────────────────────
   --rea-bg-base             Root / cell background             #ffffff
   --rea-bg-elevated         Cards, modals                      #ffffff
-  --rea-bg-subtle           Outside-month cells, headers       #f8f9fb
-  --rea-bg-wash             Today cell highlight               #eef4ff
+  --rea-bg-subtle           Outside-month cells, headers       #f8f9fa
+  --rea-bg-wash             Today cell highlight               #eff6ff
   --rea-bg-overlay          Modal backdrop                     rgba(15,23,42,0.45)
 
   ── Borders ─────────────────────────────────────────────────
-  --rea-border-default      Grid lines, input borders          #e2e6ed
-  --rea-border-focus        Focus ring color                   #3b6ff5
+  --rea-border-default      Grid lines, input borders          #cbd5e1
+  --rea-border-focus        Focus ring color                   #1d4ed8
 
   ── Text ────────────────────────────────────────────────────
   --rea-text-primary        Primary content                    #0f172a
-  --rea-text-secondary      Labels, muted content              #64748b
-  --rea-text-disabled       Outside cells, placeholders        #b0b8c4
+  --rea-text-secondary      Labels, muted content              #475569
+  --rea-text-disabled       Outside cells, placeholders        #64748b
   --rea-text-on-accent      Text on colored backgrounds        #ffffff
 
   ── Slot states ─────────────────────────────────────────────
-  --rea-slot-available-bg         Available slot fill          #16a34a
-  --rea-slot-available-bg-hover   Available slot hover         #15803d
+  --rea-slot-available-bg         Available slot fill          #15803d
+  --rea-slot-available-bg-hover   Available slot hover         #166534
   --rea-slot-available-text       Available slot text          #ffffff
-  --rea-slot-booked-bg            Booked slot fill             #3b6ff5
+  --rea-slot-booked-bg            Booked slot fill             #1d4ed8
   --rea-slot-booked-text          Booked slot text             #ffffff
-  --rea-slot-unavailable-bg       Unavailable slot fill        #e9ecf0
-  --rea-slot-unavailable-text     Unavailable slot text        #94a3b8
+  --rea-slot-unavailable-bg       Unavailable slot fill        #f1f5f9
+  --rea-slot-unavailable-text     Unavailable slot text        #475569
 
   ── Buttons ─────────────────────────────────────────────────
-  --rea-btn-primary-bg        Primary button fill              #3b6ff5
-  --rea-btn-primary-bg-hover  Primary button hover             #2d5ce8
+  --rea-btn-primary-bg        Primary button fill              #1d4ed8
+  --rea-btn-primary-bg-hover  Primary button hover             #1e40af
   --rea-btn-primary-text      Primary button text              #ffffff
-  --rea-btn-ghost-border      Ghost button border              #e2e6ed
+  --rea-btn-ghost-border      Ghost button border              #cbd5e1
   --rea-btn-ghost-bg-hover    Ghost button hover fill          #f1f5f9
 
   ── Accents ─────────────────────────────────────────────────
-  --rea-today-indicator     Today date circle + column tint    #3b6ff5
+  --rea-today-indicator     Today date circle + column tint    #1d4ed8
 
   ── Motion ──────────────────────────────────────────────────
   --rea-duration-fast       Quick transitions                  100ms
