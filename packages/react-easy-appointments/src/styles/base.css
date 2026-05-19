@@ -370,7 +370,7 @@
 .rea-month-cell__slots {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
   flex: 1;
 }
 
@@ -512,7 +512,7 @@
   padding: 2px 3px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .rea-week-view__cell--today {
