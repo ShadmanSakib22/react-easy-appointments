@@ -10,6 +10,15 @@ type Props = {
   defaultEndTime?: string
 }
 
+const DURATIONS = [
+  { label: '15m', value: 15 },
+  { label: '30m', value: 30 },
+  { label: '45m', value: 45 },
+  { label: '1h', value: 60 },
+  { label: '1.5h', value: 90 },
+  { label: '2h', value: 120 },
+]
+
 export function QuickGenerateModal({
   open,
   onClose,
@@ -22,7 +31,7 @@ export function QuickGenerateModal({
 
   const [startDate, setStartDate] = useState(getFutureDateString(1))
   const [endDate, setEndDate] = useState(getFutureDateString(7))
-  const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5]) // Mon-Fri
+  const [selectedDays, setSelectedDays] = useState<number[]>([1, 2, 3, 4, 5])
   const [startTime, setStartTime] = useState(defaultStartTime)
   const [endTime, setEndTime] = useState(defaultEndTime)
   const [duration, setDuration] = useState(defaultDuration)
@@ -37,19 +46,8 @@ export function QuickGenerateModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!startDate || !endDate || !startTime || !endTime || selectedDays.length === 0) {
-      return
-    }
-
-    const generated = generateSlotsList(
-      startDate,
-      endDate,
-      selectedDays,
-      startTime,
-      endTime,
-      duration
-    )
-
+    if (!startDate || !endDate || !startTime || !endTime || selectedDays.length === 0) return
+    const generated = generateSlotsList(startDate, endDate, selectedDays, startTime, endTime, duration)
     onGenerate(generated)
     onClose()
   }
@@ -62,16 +60,24 @@ export function QuickGenerateModal({
       aria-label="Quick generate slots"
     >
       <div className={headless ? undefined : 'rea-modal'}>
+        {/* Close button — SVG × */}
         <button
           type="button"
           onClick={onClose}
           className={headless ? undefined : 'rea-modal__close'}
           aria-label="Close"
         >
-          ×
+          {headless ? '×' : (
+            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+            </svg>
+          )}
         </button>
+
         <h2 className={headless ? undefined : 'rea-modal__title'}>⚡ Quick Generate Slots</h2>
+
         <form onSubmit={handleSubmit} className={headless ? undefined : 'rea-modal__form'}>
+          {/* Date range — 2-col grid */}
           <div className={headless ? undefined : 'rea-modal__grid-2'}>
             <label className={headless ? undefined : 'rea-modal__label'}>
               Start Date
@@ -95,6 +101,7 @@ export function QuickGenerateModal({
             </label>
           </div>
 
+          {/* Repeat days */}
           <div className={headless ? undefined : 'rea-modal__label'}>
             Repeat Days
             <div className={headless ? undefined : 'rea-modal__days-grid'}>
@@ -105,6 +112,7 @@ export function QuickGenerateModal({
                     key={day}
                     type="button"
                     onClick={() => toggleDay(idx)}
+                    aria-pressed={active}
                     className={
                       headless
                         ? undefined
@@ -118,9 +126,10 @@ export function QuickGenerateModal({
             </div>
           </div>
 
+          {/* Time range */}
           <div className={headless ? undefined : 'rea-modal__grid-2'}>
             <label className={headless ? undefined : 'rea-modal__label'}>
-              Start Time
+              From
               <input
                 type="time"
                 value={startTime}
@@ -130,7 +139,7 @@ export function QuickGenerateModal({
               />
             </label>
             <label className={headless ? undefined : 'rea-modal__label'}>
-              End Time
+              Until
               <input
                 type="time"
                 value={endTime}
@@ -141,22 +150,36 @@ export function QuickGenerateModal({
             </label>
           </div>
 
-          <label className={headless ? undefined : 'rea-modal__label'}>
+          {/* Duration — segmented control */}
+          <div className={headless ? undefined : 'rea-modal__label'}>
             Slot Duration
-            <select
-              value={duration}
-              onChange={e => setDuration(Number(e.target.value))}
-              className={headless ? undefined : 'rea-modal__select'}
-            >
-              <option value={15}>15 minutes</option>
-              <option value={30}>30 minutes</option>
-              <option value={45}>45 minutes</option>
-              <option value={60}>60 minutes (1 hour)</option>
-              <option value={90}>90 minutes (1.5 hours)</option>
-              <option value={120}>120 minutes (2 hours)</option>
-            </select>
-          </label>
+            {headless ? (
+              <select value={duration} onChange={e => setDuration(Number(e.target.value))}>
+                {DURATIONS.map(({ label, value }) => (
+                  <option key={value} value={value}>{label}</option>
+                ))}
+              </select>
+            ) : (
+              <div className="rea-modal__duration-track" role="group" aria-label="Slot duration">
+                {DURATIONS.map(({ label, value }) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setDuration(value)}
+                    aria-pressed={duration === value}
+                    className={`rea-modal__duration-btn${duration === value ? ' rea-modal__duration-btn--active' : ''}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
+          {/* Actions */}
+          <button type="submit" className={headless ? undefined : 'rea-modal__btn-generate'}>
+            ⚡ Generate Slots
+          </button>
           <div className={headless ? undefined : 'rea-modal__actions'}>
             <button
               type="button"
@@ -164,9 +187,6 @@ export function QuickGenerateModal({
               className={headless ? undefined : 'rea-modal__btn-cancel'}
             >
               Cancel
-            </button>
-            <button type="submit" className={headless ? undefined : 'rea-modal__btn-confirm'}>
-              Generate
             </button>
           </div>
         </form>
@@ -193,10 +213,8 @@ function generateSlotsList(
   slotDuration: number
 ) {
   const generated: { date: string; startTime: string; endTime: string }[] = []
-
   const start = new Date(startDateStr + 'T00:00:00')
   const end = new Date(endDateStr + 'T00:00:00')
-
   if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) return []
 
   const current = new Date(start)
@@ -217,23 +235,15 @@ function generateSlotsList(
       while (currentMinutes + slotDuration <= endMinutes) {
         const chunkStartMin = currentMinutes
         const chunkEndMin = currentMinutes + slotDuration
-
         const shStr = String(Math.floor(chunkStartMin / 60)).padStart(2, '0')
         const smStr = String(chunkStartMin % 60).padStart(2, '0')
         const ehStr = String(Math.floor(chunkEndMin / 60)).padStart(2, '0')
         const emStr = String(chunkEndMin % 60).padStart(2, '0')
-
-        generated.push({
-          date: dateStr,
-          startTime: `${shStr}:${smStr}`,
-          endTime: `${ehStr}:${emStr}`,
-        })
-
+        generated.push({ date: dateStr, startTime: `${shStr}:${smStr}`, endTime: `${ehStr}:${emStr}` })
         currentMinutes += slotDuration
       }
     }
     current.setDate(current.getDate() + 1)
   }
-
   return generated
 }
