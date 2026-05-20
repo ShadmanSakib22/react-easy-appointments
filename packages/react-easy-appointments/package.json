@@ -1,8 +1,29 @@
 {
   "name": "react-easy-appointments",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "React compound-component calendar for appointment scheduling",
+  "keywords": [
+    "react",
+    "calendar",
+    "appointment",
+    "booking",
+    "scheduler",
+    "scheduling",
+    "month-view",
+    "week-view",
+    "headless",
+    "typescript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShadmanSakib22/react-easy-appointments.git"
+  },
+  "homepage": "https://github.com/ShadmanSakib22/react-easy-appointments#readme",
+  "bugs": {
+    "url": "https://github.com/ShadmanSakib22/react-easy-appointments/issues"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,7 +35,11 @@
     },
     "./styles": "./src/styles/base.css"
   },
-  "files": ["dist", "src/styles"],
+  "files": [
+    "dist",
+    "src/styles",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
