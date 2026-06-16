@@ -1,4 +1,4 @@
-import { startOfWeek, addDays, format, isToday } from 'date-fns'
+import { startOfWeek, addDays, format, isToday, parseISO, isBefore, isAfter } from 'date-fns'
 import { useState, useEffect } from 'react'
 import { useCalendarContext } from '../Calendar/CalendarContext'
 import { TimeSlotBlock } from './TimeSlotBlock'
@@ -17,7 +17,7 @@ function getNowMinutes(): number {
 }
 
 export function WeekView() {
-  const { view, currentDate, slots, weekStartsOn, headless, weekHourStart, weekHourEnd } = useCalendarContext()
+  const { view, currentDate, slots, weekStartsOn, headless, weekHourStart, weekHourEnd, startDate, endDate } = useCalendarContext()
   const HOURS = Array.from({ length: weekHourEnd - weekHourStart + 1 }, (_, i) => i + weekHourStart)
   const [nowMinutes, setNowMinutes] = useState(getNowMinutes)
 
@@ -32,6 +32,9 @@ export function WeekView() {
   const days = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i))
   const todayInWeek = days.some(d => isToday(d))
 
+  const rangeStart = startDate ? parseISO(startDate) : null
+  const rangeEnd = endDate ? parseISO(endDate) : null
+
   if (headless) {
     return (
       <div>
@@ -45,15 +48,21 @@ export function WeekView() {
         </div>
         <div>
           {HOURS.map(hour => {
-            const hourStr = `${String(hour).padStart(2, '0')}:00`
             return (
               <div key={hour}>
                 <div>{formatHour(hour)}</div>
                 {days.map(day => {
                   const dateStr = format(day, 'yyyy-MM-dd')
-                  const cellSlots = slots.filter(
-                    s => s.date === dateStr && s.startTime === hourStr
+                  const isOutOfRange = Boolean(
+                    (rangeStart && isBefore(day, rangeStart)) ||
+                    (rangeEnd && isAfter(day, rangeEnd))
                   )
+                  const cellSlots = isOutOfRange
+                    ? []
+                    : slots.filter(s => {
+                        if (s.date !== dateStr) return false
+                        return new Date(s.startUtc).getUTCHours() === hour
+                      })
                   return (
                     <div key={day.toISOString()}>
                       {cellSlots.map(slot => (
@@ -98,7 +107,6 @@ export function WeekView() {
       {/* Grid */}
       <div className="rea-week-view__grid">
         {HOURS.map(hour => {
-          const hourStr = `${String(hour).padStart(2, '0')}:00`
           const hourStartMin = hour * 60
           const hourEndMin = (hour + 1) * 60
           const showNow = todayInWeek && nowMinutes >= hourStartMin && nowMinutes < hourEndMin
@@ -121,9 +129,16 @@ export function WeekView() {
               {days.map(day => {
                 const dateStr = format(day, 'yyyy-MM-dd')
                 const today = isToday(day)
-                const cellSlots = slots.filter(
-                  s => s.date === dateStr && s.startTime === hourStr
+                const isOutOfRange = Boolean(
+                  (rangeStart && isBefore(day, rangeStart)) ||
+                  (rangeEnd && isAfter(day, rangeEnd))
                 )
+                const cellSlots = isOutOfRange
+                  ? []
+                  : slots.filter(s => {
+                      if (s.date !== dateStr) return false
+                      return new Date(s.startUtc).getUTCHours() === hour
+                    })
                 return (
                   <div
                     key={day.toISOString()}
